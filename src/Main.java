@@ -1,13 +1,17 @@
+
 import java.math.BigInteger;
+import static java.lang.System.out;
+
 
 public class Main {
     public static void main(String[] args) {
         int[] c = {1,1,1,0, 1, 1, 0,0, 0, 0 };
         int k =3;
-        System.out.println(jumpingOnClouds(c, k));
-        System.out.println(findDigits(110110015));
+        out.println(jumpingOnClouds(c, k));
+        out.println(findDigits(110110015));
         extraLongFactorials(25);
-        System.out.println(appendAndDelete("qwerasdf", "qwerbsdf", 6));
+        out.println(appendAndDelete("qwerasdf", "qwerbsdf", 6));
+        out.println(squares(7,90));
     }
 
     static int jumpingOnClouds(int[] c, int k) {
@@ -51,7 +55,7 @@ public class Main {
         for( int i = n; i >= 1; i --){
             factorial = factorial.multiply(BigInteger.valueOf(i));
         }
-        System.out.println(factorial);
+        out.println(factorial);
     }
 
     /*
@@ -87,5 +91,29 @@ public class Main {
         }else {
             return "No";
         }
+    }
+
+    /*
+     * Complete the 'squares' function below.
+     *
+     * The function is expected to return an INTEGER.
+     * The function accepts following parameters:
+     *  1. INTEGER a
+     *  2. INTEGER b
+     */
+    public static int squares(int a, int b) {
+        int count = 0;
+        int sqrt = (int)Math.sqrt(a);
+        int square = sqrt * sqrt;
+        if (square < a){
+            sqrt ++;
+            square = sqrt * sqrt;
+        }
+        while (square >= a && square <= b){
+            count++;
+            sqrt ++;
+            square = sqrt * sqrt;
+        }
+        return count;
     }
 }
