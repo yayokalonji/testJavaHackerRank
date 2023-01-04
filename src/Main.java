@@ -12,6 +12,7 @@ public class Main {
         extraLongFactorials(25);
         out.println(appendAndDelete("qwerasdf", "qwerbsdf", 6));
         out.println(squares(7,90));
+        out.println(libraryFine(2,7,1014,1,1,1015));
     }
 
     static int jumpingOnClouds(int[] c, int k) {
@@ -115,5 +116,30 @@ public class Main {
             square = sqrt * sqrt;
         }
         return count;
+    }
+
+    /*
+     * Complete the 'libraryFine' function below.
+     *
+     * The function is expected to return an INTEGER.
+     * The function accepts following parameters:
+     *  1. INTEGER d1
+     *  2. INTEGER m1
+     *  3. INTEGER y1
+     *  4. INTEGER d2
+     *  5. INTEGER m2
+     *  6. INTEGER y2
+     */
+
+    public static int libraryFine(int d1, int m1, int y1, int d2, int m2, int y2) {
+        int fine = 0;
+        if(d1 > d2 && m1 == m2 && y1 == y2) {
+            fine = 15 * (d1 - d2);
+        }else if (m1 > m2 && y1 == y2){
+            fine =  500 * (m1 - m2);
+        } else if (y1 > y2){
+            fine = 10000 ;
+        }
+        return fine;
     }
 }
