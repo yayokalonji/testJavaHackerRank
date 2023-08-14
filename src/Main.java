@@ -2,6 +2,8 @@
 import java.math.BigInteger;
 import static java.lang.System.out;
 
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -13,6 +15,10 @@ public class Main {
         out.println(appendAndDelete("qwerasdf", "qwerbsdf", 6));
         out.println(squares(7,90));
         out.println(libraryFine(2,7,1014,1,1,1015));
+        out.println(appendAndDelete("qwerasdf", "qwerbsdf", 6));
+        out.println(removeVowel("This website is for losers LOL!"));
+        out.println(rowSumOddNumbers(2));
+
     }
 
     static int jumpingOnClouds(int[] c, int k) {
@@ -141,5 +147,14 @@ public class Main {
             fine = 10000 ;
         }
         return fine;
+    }
+
+    public static String removeVowel(String str) {
+        // remove all vowels
+        return str.replaceAll("[aeiouAEIOU]", "");
+    }
+
+    public static int rowSumOddNumbers(int n) {
+       return n * n * n;
     }
 }
