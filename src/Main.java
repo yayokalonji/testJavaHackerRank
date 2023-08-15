@@ -2,9 +2,6 @@
 import java.math.BigInteger;
 import static java.lang.System.out;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Main {
     public static void main(String[] args) {
         int[] c = {1,1,1,0, 1, 1, 0,0, 0, 0 };
@@ -18,6 +15,7 @@ public class Main {
         out.println(appendAndDelete("qwerasdf", "qwerbsdf", 6));
         out.println(removeVowel("This website is for losers LOL!"));
         out.println(rowSumOddNumbers(2));
+        out.println(isTriangle(7,2,2));
 
     }
 
@@ -156,5 +154,13 @@ public class Main {
 
     public static int rowSumOddNumbers(int n) {
        return n * n * n;
+    }
+
+    /*
+    Implement a function that accepts 3 integer values a, b, c. The function should return true if a triangle can be built with the sides of given length and false in any other case.
+    (In this case, all triangles must have surface greater than 0 to be accepted).
+     */
+    public static boolean isTriangle(int a, int b, int c){
+        return a + b > c && a + c > b && b + c > a;
     }
 }
