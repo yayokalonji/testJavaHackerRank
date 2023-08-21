@@ -5,7 +5,6 @@ import java.util.*;
 
 import static java.lang.System.out;
 
-
 public class Main {
     public static void main(String[] args) {
         int[] c = {1,1,1,0, 1, 1, 0,0, 0, 0 };
@@ -19,6 +18,10 @@ public class Main {
         out.println(cutTheSticks(Arrays.asList(5, 4, 4, 2, 2, 8)));
         out.println(nonDivisibleSubset(3, Arrays.asList(1, 7, 2, 4) ));
         out.println(repeatedString("aba", 10));
+        out.println(appendAndDelete("qwerasdf", "qwerbsdf", 6));
+        out.println(removeVowel("This website is for losers LOL!"));
+        out.println(rowSumOddNumbers(2));
+        out.println(isTriangle(7,2,2));
     }
 
     static int jumpingOnClouds(int[] c, int k) {
@@ -197,5 +200,22 @@ public class Main {
         out.println(a);
         out.println(a.charAt(0));
         return a.charAt(0);
+    }
+
+    public static String removeVowel(String str) {
+        // remove all vowels
+        return str.replaceAll("[aeiouAEIOU]", "");
+    }
+
+    public static int rowSumOddNumbers(int n) {
+       return n * n * n;
+    }
+
+    /*
+    Implement a function that accepts 3 integer values a, b, c. The function should return true if a triangle can be built with the sides of given length and false in any other case.
+    (In this case, all triangles must have surface greater than 0 to be accepted).
+     */
+    public static boolean isTriangle(int a, int b, int c){
+        return a + b > c && a + c > b && b + c > a;
     }
 }
