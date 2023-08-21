@@ -1,5 +1,8 @@
 
 import java.math.BigInteger;
+import java.util.*;
+
+
 import static java.lang.System.out;
 
 
@@ -13,6 +16,9 @@ public class Main {
         out.println(appendAndDelete("qwerasdf", "qwerbsdf", 6));
         out.println(squares(7,90));
         out.println(libraryFine(2,7,1014,1,1,1015));
+        out.println(cutTheSticks(Arrays.asList(5, 4, 4, 2, 2, 8)));
+        out.println(nonDivisibleSubset(3, Arrays.asList(1, 7, 2, 4) ));
+        out.println(repeatedString("aba", 10));
     }
 
     static int jumpingOnClouds(int[] c, int k) {
@@ -141,5 +147,55 @@ public class Main {
             fine = 10000 ;
         }
         return fine;
+    }
+
+    /*
+     * Complete the 'cutTheSticks' function below.
+     *
+     * The function is expected to return an INTEGER_ARRAY.
+     * The function accepts INTEGER_ARRAY arr as parameter.
+     */
+
+    public static List<Integer> cutTheSticks(List<Integer> arr) {
+        List<Integer> values;
+        List<Integer> countStick = new ArrayList<>();
+        countStick.add(arr.size());
+        int minValue = arr.stream().min(Integer::compare).orElse(0);
+        while (!(arr.isEmpty()))
+        {
+            final int val = minValue;
+            values = arr.stream()
+                    .map(i -> i - val ).filter(i -> i != 0)
+                    .toList();
+            if(!values.isEmpty())
+                countStick.add( values.size());
+            minValue = values.stream().min(Integer::compare).orElse(0);
+            arr=values;
+        }
+        return countStick;
+    }
+
+    public static int nonDivisibleSubset(int k, List<Integer> s) {
+        int[] remainderArr = new int[k];
+        for (int i: s) {
+            remainderArr[i % k]++;
+        }
+        int zeroRemainder = remainderArr[0];
+        int numOfElementsInSubset = (zeroRemainder > 0) ? 1 : 0;
+        for (int i = 1; i <= (k / 2); i++){
+            if (i != (k - i)) {
+                numOfElementsInSubset += Math.max(remainderArr[i], remainderArr[k - i]);
+            } else {
+                numOfElementsInSubset++;
+            }
+        }
+        return numOfElementsInSubset;
+    }
+
+    public static long repeatedString(String s, long n) {
+        String a = s.repeat((int) n);
+        out.println(a);
+        out.println(a.charAt(0));
+        return a.charAt(0);
     }
 }
