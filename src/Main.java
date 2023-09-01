@@ -26,6 +26,7 @@ public class Main {
         out.println(maskify("454578647586477767"));
         out.println(duplicateCount("indivisibility"));
         out.println(comp(new int[]{121, 144, 19, 161, 19, 144, 19, 11}, new int[]{121, 14641, 20736, 361, 25921, 361, 20736, 361}));
+        out.println(pigIt("Move the first letter []"));
     }
 
     static int jumpingOnClouds(int[] c, int k) {
@@ -243,4 +244,38 @@ public class Main {
         return a.length == b.length && Arrays.equals(Arrays.stream(a).map(i -> i * i).sorted().toArray(), Arrays.stream(b).sorted().toArray());
     }
 
+    /* Move the first letter of each word to the end of it, then add "ay" to the end of the word. Leave punctuation marks untouched. */
+    public static String pigIt(String str) {
+        String[] words = str.split(" ");
+        StringBuilder modifiedSentence = new StringBuilder();
+
+        for (String word : words) {
+            if (!word.isEmpty()) {
+                String modifiedWord = extractWord(word);
+                modifiedSentence.append(modifiedWord).append(" ");
+            }
+        }
+        return modifiedSentence.toString().trim();
+    }
+    public static String extractWord(String word) {
+        StringBuilder modifiedWord = new StringBuilder();
+        StringBuilder punctuation = new StringBuilder();
+
+        for (int i = 0; i < word.length(); i++) {
+            char ch = word.charAt(i);
+            if (Character.isLetter(ch) || ch == '\'') {
+                modifiedWord.append(ch);
+            } else {
+                punctuation.append(ch);
+            }
+        }
+
+        if (!modifiedWord.isEmpty()) {
+            char firstLetter = modifiedWord.charAt(0);
+            modifiedWord.deleteCharAt(0);
+            modifiedWord.append(firstLetter).append("ay");
+        }
+        modifiedWord.append(punctuation);
+        return modifiedWord.toString();
+    }
 }
