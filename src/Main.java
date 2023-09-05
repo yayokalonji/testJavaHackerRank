@@ -26,6 +26,7 @@ public class Main {
         out.println(maskify("454578647586477767"));
         out.println(duplicateCount("indivisibility"));
         out.println(comp(new int[]{121, 144, 19, 161, 19, 144, 19, 11}, new int[]{121, 14641, 20736, 361, 25921, 361, 20736, 361}));
+        out.println(order("is2 Thi1s T4est 3a"));
     }
 
     static int jumpingOnClouds(int[] c, int k) {
@@ -241,6 +242,14 @@ public class Main {
      */
     public static boolean comp(int[] a, int[] b) {
         return a.length == b.length && Arrays.equals(Arrays.stream(a).map(i -> i * i).sorted().toArray(), Arrays.stream(b).sorted().toArray());
+    }
+
+    /* Your task is to sort a given string. Each word in the string will contain a single number. This number is the position the word should have in the result.
+        Note: Numbers can be from 1 to 9. So 1 will be the first word (not 0).
+        If the input string is empty, return an empty string. The words in the input String will only contain valid consecutive numbers.
+    */
+    public static String order(String words) {
+        return Arrays.stream(words.split(" ")).sorted(Comparator.comparingInt(s -> s.chars().filter(c -> c >= '0' && c <= '9').findFirst().orElse('0'))).collect(Collectors.joining(" "));
     }
 
 }
