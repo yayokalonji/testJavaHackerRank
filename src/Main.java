@@ -28,6 +28,7 @@ public class Main {
         out.println(comp(new int[]{121, 144, 19, 161, 19, 144, 19, 11}, new int[]{121, 14641, 20736, 361, 25921, 361, 20736, 361}));
         out.println(order("is2 Thi1s T4est 3a"));
         out.println(pigIt("Move the first letter []"));
+        out.println(Arrays.toString(solution("abc")));
     }
 
     static int jumpingOnClouds(int[] c, int k) {
@@ -286,5 +287,13 @@ public class Main {
         }
         modifiedWord.append(punctuation);
         return modifiedWord.toString();
+    }
+
+    /* Complete the solution so that it splits the string into pairs of two characters. If the string contains an odd number of characters then it should replace the missing second character of the final pair with an underscore ('_'). */
+    public static String[] solution(String s) {
+        if (s.length() % 2 != 0) {
+            s += "_";
+        }
+        return s.split("(?<=\\G.{2})");
     }
 }
