@@ -29,6 +29,10 @@ public class Main {
         out.println(order("is2 Thi1s T4est 3a"));
         out.println(pigIt("Move the first letter []"));
         out.println(Arrays.toString(solution("abc")));
+        out.println(toRoman(2008));
+        out.println(fromRoman("MM"));
+        out.println(getPINs("11"));
+        out.println(alphanumeric("a1b2c3"));
     }
 
     static int jumpingOnClouds(int[] c, int k) {
@@ -267,6 +271,7 @@ public class Main {
         }
         return modifiedSentence.toString().trim();
     }
+
     public static String extractWord(String word) {
         StringBuilder modifiedWord = new StringBuilder();
         StringBuilder punctuation = new StringBuilder();
@@ -295,5 +300,119 @@ public class Main {
             s += "_";
         }
         return s.split("(?<=\\G.{2})");
+    }
+
+    /*
+     * Modern Roman numerals are written by expressing each digit separately starting with the left most digit and skipping any digit with a value of zero.
+     * In Roman numerals 1990 is rendered: 1000=M, 900=CM, 90=XC; resulting in MCMXC.
+     * 2008 is written as 2000=MM, 8=VIII; or MMVIII. 1666 uses each Roman symbol in descending order: MDCLXVI.
+     * */
+    public static String toRoman(int n) {
+        String[] romanSymbols = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+        int[] romanValues = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+        StringBuilder result = new StringBuilder();
+
+        for (int i = 0; i < romanValues.length; i++) {
+            while (n >= romanValues[i]) {
+                result.append(romanSymbols[i]);
+                n -= romanValues[i];
+            }
+        }
+        return result.toString();
+    }
+
+    public static int fromRoman(String romanNumeral) {
+        int result = 0;
+        int prevValue = 0;
+
+        for (int i = romanNumeral.length() - 1; i >= 0; i--) {
+            char currentSymbol = romanNumeral.charAt(i);
+            int currentValue = romanSymbolValue(currentSymbol);
+
+            if (currentValue >= prevValue) {
+                result += currentValue;
+            } else {
+                result -= currentValue;
+            }
+
+            prevValue = currentValue;
+        }
+        return result;
+    }
+
+    private static int romanSymbolValue(char symbol) {
+        return switch (symbol) {
+            case 'I' -> 1;
+            case 'V' -> 5;
+            case 'X' -> 10;
+            case 'L' -> 50;
+            case 'C' -> 100;
+            case 'D' -> 500;
+            case 'M' -> 1000;
+            default -> 0;
+        };
+    }
+
+    /*
+     *Alright, detective, one of our colleagues successfully observed our target person, Robby the robber.
+     * We followed him to a secret warehouse, where we assume to find all the stolen stuff.
+     * The door to this warehouse is secured by an electronic combination lock. Unfortunately our spy isn't sure about the PIN he saw, when Robby entered it.
+     * He noted the PIN 1357, but he also said, it is possible that each of the digits he saw could actually be another adjacent digit (horizontally or vertically, but not diagonally).
+     *  E.g. instead of the 1 it could also be the 2 or 4. And instead of the 5 it could also be the 2, 4, 6 or 8.
+     * He also mentioned, he knows this kind of locks. You can enter an unlimited amount of wrong PINs, they never finally lock the system or sound the alarm.
+     * That's why we can try out all possible (*) variations.
+     * possible in sense of: the observed PIN itself and all variations considering the adjacent digits
+     * Can you help us to find all those variations? It would be nice to have a function, that returns an array (or a list in Java/Kotlin and C#) of all variations for an observed PIN with a length of 1 to 8 digits.
+     *  We could name the function getPINs (get_pins in python, GetPINs in C#).
+     * But please note that all PINs, the observed one and also the results, must be strings, because of potentially leading '0's. We already prepared some test cases for you.
+     * Detective, we are counting on you!
+     */
+
+    public static List<String> getPINs(String observed) {
+        Map<Character, char[]> adjacentDigits = new HashMap<>();
+        adjacentDigits.put('0', new char[]{'8'});
+        adjacentDigits.put('1', new char[]{'2', '4'});
+        adjacentDigits.put('2', new char[]{'1', '3', '5'});
+        adjacentDigits.put('3', new char[]{'2', '6'});
+        adjacentDigits.put('4', new char[]{'1', '5', '7'});
+        adjacentDigits.put('5', new char[]{'2', '4', '6', '8'});
+        adjacentDigits.put('6', new char[]{'3', '5', '9'});
+        adjacentDigits.put('7', new char[]{'4', '8'});
+        adjacentDigits.put('8', new char[]{'5', '7', '9', '0'});
+        adjacentDigits.put('9', new char[]{'6', '8'});
+        List<String> result = new ArrayList<>();
+
+        List<String> combinations = new ArrayList<>();
+        generateCombinations(observed.toCharArray(), 0, new StringBuilder(), adjacentDigits, combinations);
+        return combinations;
+    }
+
+    private static void generateCombinations(char[] observed, int index, StringBuilder currentCombo,
+                                             Map<Character, char[]> adjacentDigits, List<String> combinations) {
+        if (index == observed.length) {
+            combinations.add(currentCombo.toString());
+            return;
+        }
+
+        char currentDigit = observed[index];
+        char[] possibleDigits = adjacentDigits.get(currentDigit);
+
+        for (char possibleDigit : possibleDigits) {
+            currentCombo.append(possibleDigit);
+            generateCombinations(observed, index + 1, currentCombo, adjacentDigits, combinations);
+            currentCombo.deleteCharAt(currentCombo.length() - 1);
+        }
+    }
+
+    /*
+    * In this example you have to validate if a user input string is alphanumeric. The given string is not nil/null/NULL/None, so you don't have to check that.
+        The string has the following conditions to be alphanumeric:
+        At least one character ("" is not valid)
+        Allowed characters are uppercase / lowercase latin letters and digits from 0 to 9
+        No whitespaces / underscore
+    *
+    * */
+    public static boolean alphanumeric(String s){
+        return s.matches("^[a-zA-Z0-9]+$");
     }
 }
