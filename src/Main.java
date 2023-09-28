@@ -488,8 +488,8 @@ public class Main {
         if (arr.length == 0) return 0;
         int max = 0;
         int current = 0;
-        for (int i = 0; i < arr.length; i++) {
-            current += arr[i];
+        for (int j : arr) {
+            current += j;
             if (current < 0) current = 0;
             if (current > max) max = current;
         }
