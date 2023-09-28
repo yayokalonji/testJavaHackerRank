@@ -33,6 +33,11 @@ public class Main {
         out.println(fromRoman("MM"));
         out.println(getPINs("11"));
         out.println(alphanumeric("a1b2c3"));
+        out.println(solution(10));
+        out.println(isPrime(-1));
+        out.println(zeros(12));
+        out.println(sumStrings("123", "456"));
+        out.print(sequence(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4}));
     }
 
     static int jumpingOnClouds(int[] c, int k) {
@@ -362,7 +367,7 @@ public class Main {
      * He also mentioned, he knows this kind of locks. You can enter an unlimited amount of wrong PINs, they never finally lock the system or sound the alarm.
      * That's why we can try out all possible (*) variations.
      * possible in sense of: the observed PIN itself and all variations considering the adjacent digits
-     * Can you help us to find all those variations? It would be nice to have a function, that returns an array (or a list in Java/Kotlin and C#) of all variations for an observed PIN with a length of 1 to 8 digits.
+     *  Can you help us to find all those variations? It would be nice to have a function, that returns an array (or a list in Java/Kotlin and C#) of all variations for an observed PIN with a length of 1 to 8 digits.
      *  We could name the function getPINs (get_pins in python, GetPINs in C#).
      * But please note that all PINs, the observed one and also the results, must be strings, because of potentially leading '0's. We already prepared some test cases for you.
      * Detective, we are counting on you!
@@ -414,5 +419,80 @@ public class Main {
     * */
     public static boolean alphanumeric(String s){
         return s.matches("^[a-zA-Z0-9]+$");
+    }
+    /*
+    * If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.
+    Finish the solution so that it returns the sum of all the multiples of 3 or 5 below the number passed in.
+    * Note: If the number is a multiple of both 3 and 5, only count it once.
+    * */
+
+    public static  int solution(int number) {
+        int sum = 0;
+        for (int i = 1; i < number; i++) {
+            if (i % 3 == 0 || i % 5 == 0) {
+                sum += i;
+            }
+        }
+        return sum;
+    }
+
+    private static boolean isPrime(int num){
+        if(num <= 1) return false;
+        if(num == 2) return true;
+        if(num % 2 == 0) return false;
+        for(int i = 3; i <= Math.sqrt(num); i += 2){
+            if(num % i == 0) return false;
+        }
+        return true;
+    }
+
+    /*
+     * Write a program that will calculate the number of trailing zeros in a factorial of a given number.
+     * */
+    public static int zeros(int n) {
+        int count = 0;
+        for (long i = 5; n / i >= 1; i *= 5)
+            count += n / i;
+        return count;
+    }
+
+    /**
+     * Given the string representations of two integers, return the string representation of the sum of those integers.
+     * A string representation of an integer will contain no characters besides the ten numerals "0" to "9".
+     * I have removed the use of BigInteger and BigDecimal in java
+     * */
+
+    public static String sumStrings(String a, String b) {
+        a = a.replaceFirst("^0+(?!$)", "");
+        b = b.replaceFirst("^0+(?!$)", "");
+
+        // Parse the strings into BigInteger objects
+        BigInteger bigInteger1 = new BigInteger(a);
+        BigInteger bigInteger2 = new BigInteger(b);
+
+        // Get the sum of the BigIntegers
+        BigInteger sum = bigInteger1.add(bigInteger2);
+
+        // Convert the sum to a string representation and return it
+        return sum.toString();
+    }
+
+    /*
+    * The maximum sum subarray problem consists in finding the maximum sum of a contiguous subsequence in an array or list of integers:
+    * Max.sequence(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4});
+    // should be 6: {4, -1, 2, 1}
+    Easy case is when the list is made up of only positive numbers and the maximum sum is the sum of the whole array. If the list is made up of only negative numbers, return 0 instead.
+    Empty list is considered to have zero greatest sum. Note that the empty list or array is also a valid sublist/subarray.
+    * */
+    public static int sequence(int[] arr) {
+        if (arr.length == 0) return 0;
+        int max = 0;
+        int current = 0;
+        for (int i = 0; i < arr.length; i++) {
+            current += arr[i];
+            if (current < 0) current = 0;
+            if (current > max) max = current;
+        }
+        return max;
     }
 }
