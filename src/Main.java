@@ -385,7 +385,6 @@ public class Main {
         adjacentDigits.put('7', new char[]{'4', '8'});
         adjacentDigits.put('8', new char[]{'5', '7', '9', '0'});
         adjacentDigits.put('9', new char[]{'6', '8'});
-        List<String> result = new ArrayList<>();
 
         List<String> combinations = new ArrayList<>();
         generateCombinations(observed.toCharArray(), 0, new StringBuilder(), adjacentDigits, combinations);
@@ -452,7 +451,7 @@ public class Main {
     public static int zeros(int n) {
         int count = 0;
         for (long i = 5; n / i >= 1; i *= 5)
-            count += n / i;
+            count += (int) (n / i);
         return count;
     }
 
