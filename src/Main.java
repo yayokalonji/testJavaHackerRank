@@ -7,7 +7,21 @@ import java.util.stream.Collectors;
 import static java.lang.System.out;
 
 public class Main {
-    public static void main(String[] args) {
+
+
+    private static class Node {
+        public Node left;
+        public Node right;
+        public int value;
+
+        public Node(Node l, Node r, int v) {
+            left = l;
+            right = r;
+            value = v;
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
         int[] c = {1, 1, 1, 0, 1, 1, 0, 0, 0, 0};
         int k = 3;
         out.println(jumpingOnClouds(c, k));
@@ -37,7 +51,26 @@ public class Main {
         out.println(isPrime(-1));
         out.println(zeros(12));
         out.println(sumStrings("123", "456"));
-        out.print(sequence(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4}));
+        out.println(sequence(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4}));
+        out.println(ipsBetween("0.0.0.0", "255.255.255.255"));
+        out.println(treeByLevels(new Node(new Node(null, new Node(null, null, 4), 2), new Node(new Node(null, null, 5), new Node(null, null, 6), 3), 1)));
+        out.println(longToIP(2154959208L));
+        User user = new User();
+        user.incProgress(-7);  // User ranked -8 completes an activity ranked -7
+        System.out.println("Rank: " + user.rank);       // Output: -7
+        System.out.println("Progress: " + user.progress); // Output: 10
+
+        user.incProgress(-6);  // User ranked -7 completes an activity ranked -6
+        System.out.println("Rank: " + user.rank);       // Output: -7
+        System.out.println("Progress: " + user.progress); // Output: 60
+
+        user.incProgress(-4);  // User ranked -7 completes an activity ranked -4
+        System.out.println("Rank: " + user.rank);       // Output: -6
+        System.out.println("Progress: " + user.progress); // Output: 60
+
+        user.incProgress(-1);   // User ranked -6 completes an activity ranked 1
+        System.out.println("Rank: " + user.rank);       // Output: -6
+        System.out.println("Progress: " + user.progress);
     }
 
     static int jumpingOnClouds(int[] c, int k) {
@@ -391,8 +424,7 @@ public class Main {
         return combinations;
     }
 
-    private static void generateCombinations(char[] observed, int index, StringBuilder currentCombo,
-                                             Map<Character, char[]> adjacentDigits, List<String> combinations) {
+    private static void generateCombinations(char[] observed, int index, StringBuilder currentCombo, Map<Character, char[]> adjacentDigits, List<String> combinations) {
         if (index == observed.length) {
             combinations.add(currentCombo.toString());
             return;
@@ -416,7 +448,7 @@ public class Main {
         No whitespaces / underscore
     *
     * */
-    public static boolean alphanumeric(String s){
+    public static boolean alphanumeric(String s) {
         return s.matches("^[a-zA-Z0-9]+$");
     }
     /*
@@ -425,7 +457,7 @@ public class Main {
     * Note: If the number is a multiple of both 3 and 5, only count it once.
     * */
 
-    public static  int solution(int number) {
+    public static int solution(int number) {
         int sum = 0;
         for (int i = 1; i < number; i++) {
             if (i % 3 == 0 || i % 5 == 0) {
@@ -435,12 +467,12 @@ public class Main {
         return sum;
     }
 
-    private static boolean isPrime(int num){
-        if(num <= 1) return false;
-        if(num == 2) return true;
-        if(num % 2 == 0) return false;
-        for(int i = 3; i <= Math.sqrt(num); i += 2){
-            if(num % i == 0) return false;
+    private static boolean isPrime(int num) {
+        if (num <= 1) return false;
+        if (num == 2) return true;
+        if (num % 2 == 0) return false;
+        for (int i = 3; i <= Math.sqrt(num); i += 2) {
+            if (num % i == 0) return false;
         }
         return true;
     }
@@ -459,7 +491,7 @@ public class Main {
      * Given the string representations of two integers, return the string representation of the sum of those integers.
      * A string representation of an integer will contain no characters besides the ten numerals "0" to "9".
      * I have removed the use of BigInteger and BigDecimal in java
-     * */
+     */
 
     public static String sumStrings(String a, String b) {
         a = a.replaceFirst("^0+(?!$)", "");
@@ -493,5 +525,137 @@ public class Main {
             if (current > max) max = current;
         }
         return max;
+    }
+
+    /*
+    * Implement a function that receives two IPv4 addresses, and returns the number of addresses between them (including the first one, excluding the last one).
+    All inputs will be valid IPv4 addresses in the form of strings. The last address will always be greater than the first one.
+    * */
+    public static long ipsBetween(String start, String end) {
+       /* long startIp = 0;
+        long endIp = 0;
+        for (int i = 0; i < start.length(); i++) {
+            if (start.charAt(i) == '.') {
+                startIp = startIp * 256 + Integer.parseInt(start.substring(i + 1, i + 2));
+            }
+        }
+        for (int i = 0; i < end.length(); i++) {
+            if (end.charAt(i) == '.') {
+                endIp = endIp * 256 + Integer.parseInt(end.substring(i + 1, i + 2));
+            }
+        }
+        return (endIp - startIp - 1);*/
+        long startIp = Arrays.stream(start.split("\\.")).mapToLong(Long::parseLong).reduce(0L, (result, octet) -> (result << 8) + octet);
+        long endIp = Arrays.stream(end.split("\\.")).mapToLong(Long::parseLong).reduce(0L, (result, octet) -> (result << 8) + octet);
+
+        return (endIp - startIp);
+    }
+
+    public static List<Integer> treeByLevels(Node node) {
+        List<Integer> levels = new ArrayList<>();
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(node);
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                Node current = queue.poll();
+                if (current != null) {
+                    levels.add(current.value);
+                    if (current.left != null) queue.add(current.left);
+                    if (current.right != null) queue.add(current.right);
+                }
+            }
+        }
+        return levels;
+    }
+
+    /*
+    *
+    * Take the following IPv4 address: 128.32.10.1
+        This address has 4 octets where each octet is a single byte (or 8 bits).
+
+        1st octet 128 has the binary representation: 10000000
+        2nd octet 32 has the binary representation: 00100000
+        3rd octet 10 has the binary representation: 00001010
+        4th octet 1 has the binary representation: 00000001
+        So 128.32.10.1 == 10000000.00100000.00001010.00000001
+
+        Because the above IP address has 32 bits, we can represent it as the unsigned 32 bit number: 2149583361
+
+        Complete the function that takes an unsigned 32 bit number and returns a string representation of its IPv4 address.
+    * */
+    public static String longToIP(long ip) {
+        return String.format("%d.%d.%d.%d", (ip >> 24) & 0xff, (ip >> 16) & 0xff, (ip >> 8) & 0xff, ip & 0xff);
+    }
+
+    /*
+    * Write a class called User that is used to calculate the amount that a user will progress through a ranking system similar to the one Codewars uses.
+
+    Business Rules:
+
+    A user starts at rank -8 and can progress all the way to 8.
+    There is no 0 (zero) rank. The next rank after -1 is 1.
+    Users will complete activities. These activities also have ranks.
+    Each time the user completes a ranked activity the users rank progress is updated based off of the activity's rank
+    The progress earned from the completed activity is relative to what the user's current rank is compared to the rank of the activity
+    A user's rank progress starts off at zero, each time the progress reaches 100 the user's rank is upgraded to the next level
+    Any remaining progress earned while in the previous rank will be applied towards the next rank's progress (we don't throw any progress away). The exception is if there is no other rank left to progress towards (Once you reach rank 8 there is no more progression).
+    A user cannot progress beyond rank 8.
+    The only acceptable range of rank values is -8,-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7,8. Any other value should raise an error.
+    The progress is scored like so:
+
+    Completing an activity that is ranked the same as that of the user's will be worth 3 points
+    Completing an activity that is ranked one ranking lower than the user's will be worth 1 point
+    Any activities completed that are ranking 2 levels or more lower than the user's ranking will be ignored
+    Completing an activity ranked higher than the current user's rank will accelerate the rank progression. The greater the difference between rankings the more the progression will be increased. The formula is 10 * d * d where d equals the difference in ranking between the activity and the user.
+    Logic Examples:
+
+    If a user ranked -8 completes an activity ranked -7 they will receive 10 progress
+    If a user ranked -8 completes an activity ranked -6 they will receive 40 progress
+    If a user ranked -8 completes an activity ranked -5 they will receive 90 progress
+    If a user ranked -8 completes an activity ranked -4 they will receive 160 progress, resulting in the user being upgraded to rank -7 and having earned 60 progress towards their next rank
+    If a user ranked -1 completes an activity ranked 1 they will receive 10 progress (remember, zero rank is ignored)
+    * */
+    public static class User {
+        private int rank;
+        private int progress;
+
+        public User() {
+            this.rank = -8;
+            this.progress = 0;
+        }
+
+        public void incProgress(int activityRank) {
+            if (activityRank < -8 || activityRank == 0 || activityRank > 8) {
+                throw new IllegalArgumentException("Invalid activity rank");
+            }
+
+            int rankDiff = activityRank - this.rank;
+
+            if (rankDiff == 0) {
+                this.progress += 3;
+            } else if (rankDiff == -1) {
+                this.progress += 1;
+            } else if (rankDiff > 0) {
+                this.progress += 10 * rankDiff * rankDiff;
+            }
+
+            while (this.progress >= 100) {
+                if (this.rank == -1) {
+                    this.rank += 2;
+                } else {
+                    this.rank += 1;
+                }
+                if (this.rank == 0) {
+                    this.rank = 1;
+                }
+                this.progress -= 100;
+            }
+
+            if (this.rank >= 8) {
+                this.rank = 8;
+                this.progress = 0;
+            }
+        }
     }
 }
