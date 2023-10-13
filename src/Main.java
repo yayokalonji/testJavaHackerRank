@@ -71,6 +71,8 @@ public class Main {
         user.incProgress(-1);   // User ranked -6 completes an activity ranked 1
         System.out.println("Rank: " + user.rank);       // Output: -6
         System.out.println("Progress: " + user.progress);
+        out.println(top3("\"  '  \""));
+        out.println(stripComments("apples, pears # and bananas\ngrapes\nbananas !apples", new String[]{"#", "!"}));
     }
 
     static int jumpingOnClouds(int[] c, int k) {
@@ -657,5 +659,52 @@ public class Main {
                 this.progress = 0;
             }
         }
+    }
+
+    /*
+    Write a function that, given a string of text (possibly with punctuation and line-breaks), returns an array of the top-3 most occurring words, in descending order of the number of occurrences.
+    Assumptions:
+    A word is a string of letters (A to Z) optionally containing one or more apostrophes (') in ASCII.
+    Apostrophes can appear at the start, middle or end of a word ('abc, abc', 'abc', ab'c are all valid)
+    Any other characters (e.g. #, \, / , . ...) are not part of a word and should be treated as whitespace.
+    Matches should be case-insensitive, and the words in the result should be lowercased.
+    Ties may be broken arbitrarily.
+    If a text contains fewer than three unique words, then either the top-2 or top-1 words should be returned, or an empty array if a text contains no words.
+     */
+
+    public static List<String> top3(String s) {
+        s = s.toLowerCase().replaceAll("[^a-z']", " ");
+        String[] words = s.trim().split("\\s+");
+
+        Map<String, Integer> wordCounts = new HashMap<>();
+        for (String word : words) {
+            wordCounts.put(word, wordCounts.getOrDefault(word, 0) + 1);
+        }
+
+        List<Map.Entry<String, Integer>> sortedWords = new ArrayList<>(wordCounts.entrySet());
+        sortedWords.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
+
+        List<String> topWords = new ArrayList<>();
+        for (int i = 0; i < Math.min(sortedWords.size(), 3); i++) {
+            topWords.add(sortedWords.get(i).getKey());
+        }
+        return topWords;
+    }
+
+    /*
+    * Complete the solution so that it strips all text that follows any of a set of comment markers passed in. Any whitespace at the end of the line should also be stripped out.
+    */
+    public static String stripComments(String text, String[] commentSymbols) {
+        String[] lines = text.split("\n");
+        for (int i = 0; i < lines.length; i++) {
+            for (String symbol : commentSymbols) {
+                int index = lines[i].indexOf(symbol);
+                if (index != -1) {
+                    lines[i] = lines[i].substring(0, index);
+                    break;
+                }
+            }
+        }
+        return String.join("\n", lines);
     }
 }
