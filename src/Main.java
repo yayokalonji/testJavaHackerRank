@@ -10,9 +10,9 @@ public class Main {
 
 
     private static class Node {
-        public static Node left;
-        public static Node right;
-        public static int value;
+        public Node left;
+        public Node right;
+        public int value;
 
         public Node(Node l, Node r, int v) {
             left = l;
