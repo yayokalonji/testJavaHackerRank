@@ -10,9 +10,9 @@ public class Main {
 
 
     private static class Node {
-        public Node left;
-        public Node right;
-        public int value;
+        public static Node left;
+        public static Node right;
+        public static int value;
 
         public Node(Node l, Node r, int v) {
             left = l;
@@ -21,7 +21,7 @@ public class Main {
         }
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         int[] c = {1, 1, 1, 0, 1, 1, 0, 0, 0, 0};
         int k = 3;
         out.println(jumpingOnClouds(c, k));
@@ -57,22 +57,14 @@ public class Main {
         out.println(longToIP(2154959208L));
         User user = new User();
         user.incProgress(-7);  // User ranked -8 completes an activity ranked -7
-        System.out.println("Rank: " + user.rank);       // Output: -7
-        System.out.println("Progress: " + user.progress); // Output: 10
-
-        user.incProgress(-6);  // User ranked -7 completes an activity ranked -6
-        System.out.println("Rank: " + user.rank);       // Output: -7
-        System.out.println("Progress: " + user.progress); // Output: 60
-
-        user.incProgress(-4);  // User ranked -7 completes an activity ranked -4
-        System.out.println("Rank: " + user.rank);       // Output: -6
-        System.out.println("Progress: " + user.progress); // Output: 60
-
-        user.incProgress(-1);   // User ranked -6 completes an activity ranked 1
-        System.out.println("Rank: " + user.rank);       // Output: -6
-        System.out.println("Progress: " + user.progress);
+        out.println("Rank: " + user.rank);       // Output: -7
+        out.println("Progress: " + user.progress); // Output: 10
         out.println(top3("\"  '  \""));
         out.println(stripComments("apples, pears # and bananas\ngrapes\nbananas !apples", new String[]{"#", "!"}));
+        Arrays.stream(arrayDiff(new int[]{1, 2, 3}, new int[]{2})).forEach(out::println);
+        out.println(toJadenCase("hello world"));
+        out.println(greet("Jackson"));
+        out.println(removeChar("eloquent"));
     }
 
     static int jumpingOnClouds(int[] c, int k) {
@@ -143,9 +135,9 @@ public class Main {
         int tMinusCount = t.length() - count;
         int sMinusCount = s.length() - count;
 
-        int STK = k - (tMinusCount + sMinusCount);
+        int stk = k - (tMinusCount + sMinusCount);
 
-        if (tMinusCount + sMinusCount < k && t.length() + s.length() > k && STK % 2 != 0) {
+        if (tMinusCount + sMinusCount < k && t.length() + s.length() > k && stk % 2 != 0) {
             return "No";
         } else if (tMinusCount + sMinusCount <= k) {
             return "Yes";
@@ -334,7 +326,10 @@ public class Main {
         return modifiedWord.toString();
     }
 
-    /* Complete the solution so that it splits the string into pairs of two characters. If the string contains an odd number of characters then it should replace the missing second character of the final pair with an underscore ('_'). */
+    /* Complete the solution so that it splits the string into pairs of two characters.
+    If the string contains an odd number of characters,
+    then it should replace the missing second character of the final pair with an underscore
+    ('_'). */
     public static String[] solution(String s) {
         if (s.length() % 2 != 0) {
             s += "_";
@@ -343,9 +338,11 @@ public class Main {
     }
 
     /*
-     * Modern Roman numerals are written by expressing each digit separately starting with the left most digit and skipping any digit with a value of zero.
+     * Modern Roman numerals are written by expressing each digit separately,
+     * starting with the left most digit and skipping any digit with a value of zero.
      * In Roman numerals 1990 is rendered: 1000=M, 900=CM, 90=XC; resulting in MCMXC.
-     * 2008 is written as 2000=MM, 8=VIII; or MMVIII. 1666 uses each Roman symbol in descending order: MDCLXVI.
+     * 2008 is written as 2000=MM, 8=VIII; or MMVIII.
+     * 1666 uses each Roman symbol in descending order: MDCLXVI.
      * */
     public static String toRoman(int n) {
         String[] romanSymbols = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
@@ -402,9 +399,9 @@ public class Main {
      * He also mentioned, he knows this kind of locks. You can enter an unlimited amount of wrong PINs, they never finally lock the system or sound the alarm.
      * That's why we can try out all possible (*) variations.
      * possible in sense of: the observed PIN itself and all variations considering the adjacent digits
-     *  Can you help us to find all those variations? It would be nice to have a function, that returns an array (or a list in Java/Kotlin and C#) of all variations for an observed PIN with a length of 1 to 8 digits.
+     *  Can you help us find all those variations? It would be nice to have a function, that returns an array (or a list in Java/Kotlin and C#) of all variations for an observed PIN with a length of 1 to 8 digits.
      *  We could name the function getPINs (get_pins in python, GetPINs in C#).
-     * But please note that all PINs, the observed one and also the results, must be strings, because of potentially leading '0's. We already prepared some test cases for you.
+     * But please note that all PINs, the observed one and also the results must be strings, because of potentially leading '0's. We already prepared some test cases for you.
      * Detective, we are counting on you!
      */
 
@@ -512,9 +509,7 @@ public class Main {
 
     /*
     * The maximum sum subarray problem consists in finding the maximum sum of a contiguous subsequence in an array or list of integers:
-    * Max.sequence(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4});
-    // should be 6: {4, -1, 2, 1}
-    Easy case is when the list is made up of only positive numbers and the maximum sum is the sum of the whole array. If the list is made up of only negative numbers, return 0 instead.
+    An easy case is when the list is made up of only positive numbers and the maximum sum is the sum of the whole array. If the list is made up of only negative numbers, return 0 instead.
     Empty list is considered to have zero greatest sum. Note that the empty list or array is also a valid sublist/subarray.
     * */
     public static int sequence(int[] arr) {
@@ -534,19 +529,6 @@ public class Main {
     All inputs will be valid IPv4 addresses in the form of strings. The last address will always be greater than the first one.
     * */
     public static long ipsBetween(String start, String end) {
-       /* long startIp = 0;
-        long endIp = 0;
-        for (int i = 0; i < start.length(); i++) {
-            if (start.charAt(i) == '.') {
-                startIp = startIp * 256 + Integer.parseInt(start.substring(i + 1, i + 2));
-            }
-        }
-        for (int i = 0; i < end.length(); i++) {
-            if (end.charAt(i) == '.') {
-                endIp = endIp * 256 + Integer.parseInt(end.substring(i + 1, i + 2));
-            }
-        }
-        return (endIp - startIp - 1);*/
         long startIp = Arrays.stream(start.split("\\.")).mapToLong(Long::parseLong).reduce(0L, (result, octet) -> (result << 8) + octet);
         long endIp = Arrays.stream(end.split("\\.")).mapToLong(Long::parseLong).reduce(0L, (result, octet) -> (result << 8) + octet);
 
@@ -582,9 +564,9 @@ public class Main {
         4th octet 1 has the binary representation: 00000001
         So 128.32.10.1 == 10000000.00100000.00001010.00000001
 
-        Because the above IP address has 32 bits, we can represent it as the unsigned 32 bit number: 2149583361
+        Because the above IP address has 32 bits, we can represent it as the unsigned 32-bit number: 2149583361
 
-        Complete the function that takes an unsigned 32 bit number and returns a string representation of its IPv4 address.
+        Complete the function that takes an unsigned 32-bit number and returns a string representation of its IPv4 address.
     * */
     public static String longToIP(long ip) {
         return String.format("%d.%d.%d.%d", (ip >> 24) & 0xff, (ip >> 16) & 0xff, (ip >> 8) & 0xff, ip & 0xff);
@@ -608,7 +590,7 @@ public class Main {
 
     Completing an activity that is ranked the same as that of the user's will be worth 3 points
     Completing an activity that is ranked one ranking lower than the user's will be worth 1 point
-    Any activities completed that are ranking 2 levels or more lower than the user's ranking will be ignored
+    Any activities completed that are ranking 2 levels or lower than the user's ranking will be ignored
     Completing an activity ranked higher than the current user's rank will accelerate the rank progression. The greater the difference between rankings the more the progression will be increased. The formula is 10 * d * d where d equals the difference in ranking between the activity and the user.
     Logic Examples:
 
@@ -648,9 +630,6 @@ public class Main {
                 } else {
                     this.rank += 1;
                 }
-                if (this.rank == 0) {
-                    this.rank = 1;
-                }
                 this.progress -= 100;
             }
 
@@ -667,7 +646,7 @@ public class Main {
     A word is a string of letters (A to Z) optionally containing one or more apostrophes (') in ASCII.
     Apostrophes can appear at the start, middle or end of a word ('abc, abc', 'abc', ab'c are all valid)
     Any other characters (e.g. #, \, / , . ...) are not part of a word and should be treated as whitespace.
-    Matches should be case-insensitive, and the words in the result should be lowercased.
+    Matches should be case-insensitive, and the words in the result should be lowercase.
     Ties may be broken arbitrarily.
     If a text contains fewer than three unique words, then either the top-2 or top-1 words should be returned, or an empty array if a text contains no words.
      */
@@ -692,8 +671,9 @@ public class Main {
     }
 
     /*
-    * Complete the solution so that it strips all text that follows any of a set of comment markers passed in. Any whitespace at the end of the line should also be stripped out.
-    */
+     * Complete the solution so that it strips all text that follows any of a set of comment markers passed in.
+     * Any whitespace at the end of the line should also be stripped out.
+     */
     public static String stripComments(String text, String[] commentSymbols) {
         String[] lines = text.split("\n");
         for (int i = 0; i < lines.length; i++) {
@@ -706,5 +686,60 @@ public class Main {
             }
         }
         return String.join("\n", lines);
+    }
+
+    /**
+     * Your goal in this kata is to implement a difference function,
+     * which subtracts one list from another and returns the result.
+     * It should remove all values from list a which are present in list b keeping their order.
+     */
+    public static int[] arrayDiff(int[] a, int[] b) {
+        List<Integer> result = new ArrayList<>();
+        for (int item : a) {
+            boolean isContained = false;
+            for (int element : b) {
+                if (item == element) {
+                    isContained = true;
+                    break;
+                }
+            }
+
+            if (!isContained) {
+                result.add(item);
+            }
+        }
+        return result.stream().mapToInt(Integer::intValue).toArray();
+    }
+
+    /*
+     * Jaden Smith, the son of Will Smith, is the star of films such as The Karate Kid (2010) and After Earth (2013).
+     * Jaden is also known for some of his philosophy that he delivers via Twitter. When writing on Twitter, he is known for almost always capitalizing every word.
+     * For simplicity, you'll have to capitalize each word, check out how contractions are expected to be in the example below.
+     * Your task is to convert strings to how they would be written by Jaden Smith.
+     * The strings are actual quotes from Jaden Smith, but they are not capitalized in the same way he originally typed them.
+     */
+    public static String toJadenCase(String phrase) {
+        if (phrase == null || phrase.isEmpty()) {
+            return null;
+        } else {
+            return Arrays.stream(phrase.split(" ")).map(i -> i.substring(0, 1).toUpperCase() + i.substring(1)).collect(Collectors.joining(" "));
+        }
+    }
+    /*
+    * Make a function that will return a greeting statement that uses an input
+    * your program should return, "Hello, <name> how are you doing today?"
+    * [Make sure you type the exact thing I wrote or the program may not execute properly]
+    * */
+    public static String greet(String name) {
+        return String.format("Hello, %s how are you doing today?", name);
+    }
+    /*
+    * It's pretty straightforward.
+    * Your goal is to create a function that removes the first and last characters of a string.
+    * You're given one parameter, the original string.
+    * You don't have to worry about strings with less than two characters.
+    */
+    public static String removeChar(String str) {
+        return str.substring(1, str.length() - 1);
     }
 }
