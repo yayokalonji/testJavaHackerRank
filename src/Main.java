@@ -65,6 +65,22 @@ public class Main {
         out.println(toJadenCase("hello world"));
         out.println(greet("Jackson"));
         out.println(removeChar("eloquent"));
+        out.println(convert(false));
+        ArrayList<int[]> list = new ArrayList<int[]>();
+        list.add(new int[] {10,0});
+        list.add(new int[] {3,5});
+        list.add(new int[] {2,5});
+        out.println(countPassengers(list));
+        Object[] haystack1 = {"3", "123124234", null, "needle", "world", "hay", 2, "3", true, false};
+        out.println(findNeedle(haystack1));
+        out.println(Arrays.toString(towerBuilder(3)));
+        out.println(noSpace("8 j 8   mBliB8g  imjB8B8  jl  B"));
+        out.println(stringToNumber("1234"));
+        out.println(countSheep(new Boolean[]{true, true, true, false, true, true, true, true, true, true, true, false, false, true, true}));
+        out.println(binaryAddition(3, 4));
+        out.println(hero(1938854660, 1551468324));
+        out.println(areYouPlayingBanjo("Martin"));
+        out.println(isLove(1, 1));
     }
 
     static int jumpingOnClouds(int[] c, int k) {
@@ -741,5 +757,108 @@ public class Main {
     */
     public static String removeChar(String str) {
         return str.substring(1, str.length() - 1);
+    }
+
+    /*
+    * Convert boolean values to strings.
+    * */
+    public static String convert(boolean b) {
+        return String.valueOf(b);
+    }
+
+    /*
+    * There is a bus moving in the city which takes and drops some people at each bus stop.
+    * You are provided with a list (or array) of integer pairs.
+    * Elements of each pair represent the number of people that get on the bus (the first item) and the number of people that get off the bus (the second item) at a bus stop.
+    * Your task is to return the number of people who are still on the bus after the last bus stop (after the last array).
+    * Even though it is the last bus stop, the bus might not be empty and some people might still be inside the bus, they are probably sleeping there :D
+    * Take a look on the test cases. Please keep in mind that the test cases ensure that the number of people in the bus is always >= 0. So the returned integer can't be negative.
+    * The second value in the first pair in the array is 0, since the bus is empty in the first bus stop.
+    * */
+    public static int countPassengers(ArrayList<int[]> stops) {
+        int result = 0;
+        for (int[] stop : stops) {
+            result += stop[0] - stop[1];
+        }
+        return result;
+    }
+
+    /*
+    * Find the needle in the haystack.
+    * */
+    public static String findNeedle(Object [] haystack){
+        return "found the needle at position " + Arrays.asList(haystack).indexOf("needle");
+    }
+
+    /*
+    * Build a pyramid-shaped tower, as an array/list of strings, given a positive integer number of floors. A tower block is represented with "*" character.
+    * */
+    public static String[]  towerBuilder(int nFloors) {
+        String[] result = new String[nFloors];
+        for (int i = 1; i <= nFloors; i++) {
+            String spaces = " ".repeat(nFloors - i);
+            String blocks = "*".repeat(i * 2 - 1);
+            String floor = spaces + blocks + spaces;
+            result[i- 1] = floor;
+        }
+        return result;
+    }
+    /*
+    * Write a function that removes the spaces from the string, then return the resultant string.
+    * */
+    public static String noSpace(final String x) {
+        return x.replace(" ", "");
+    }
+
+    /*
+    * We need a function that can transform a string into a number. What ways of achieving this do you know?
+    * Note: Don't worry, all inputs will be strings, and every string is a perfectly valid representation of an integral number.
+    * */
+    public static int stringToNumber(String str) {
+        return Integer.parseInt(str) ;
+    }
+    /*
+    * Consider an array/list of sheep where some sheep may be missing from their place. We need a function that counts the number of sheep present in the array (true means present).
+    * */
+    public static int countSheep(Boolean[] arrayOfSheep) {
+        int count = 0;
+        for (Boolean sheep : arrayOfSheep) {
+            if (sheep != null && sheep) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    /*
+    * Implement a function that adds two numbers together and returns their sum in binary. The conversion can be done before, or after the addition.
+    * The binary number returned should be a string.
+    * */
+    public static String binaryAddition(int a, int b){
+        return Integer.toBinaryString(a + b);
+    }
+
+    /*
+    * A hero is on his way to the castle to complete his mission. However, he's been told that the castle is surrounded with a couple of powerful dragons! each dragon takes 2 bullets to be defeated,
+    * our hero has no idea how many bullets he should carry.
+    * Assuming he's going to grab a specific given number of bullets and move forward to fight another specific given number of dragons, will he survive?
+    * Return true if yes, false otherwise :)
+    * */
+    public static boolean hero(int bullets, int dragons){
+        return Double.parseDouble(String.valueOf(bullets)) >= 2 * Double.parseDouble(String.valueOf(dragons));
+    }
+
+    /*
+    * */
+    public static String areYouPlayingBanjo(String name) {
+        return name.toLowerCase().startsWith("r") ? name +" plays banjo" :  name + " does not play banjo";
+    }
+
+    /**
+     * Timmy & Sarah think they are in love, but around where they live, they will only know once they pick a flower each. If one of the flowers has an even number of petals and the other has an odd number of petals it means they are in love.
+     * Write a function that will take the number of petals of each flower and return true if they are in love and false if they aren't.
+     */
+    public static boolean isLove(final int flower1, final int flower2) {
+        return (flower1 % 2 == 0 &&  flower2 % 2 != 0) || (flower1 % 2 != 0 && flower2 % 2 == 0);
     }
 }
