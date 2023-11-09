@@ -65,6 +65,17 @@ public class Main {
         out.println(toJadenCase("hello world"));
         out.println(greet("Jackson"));
         out.println(removeChar("eloquent"));
+        out.println(sortDesc(478673));
+        out.println(isIsogram("moose"));
+        out.println(accum("abcd"));
+        out.println(squareSum(new int[]{2,2,2}));
+        out.println(reverse("world"));
+        out.println(findSmallestInt(new int[]{34, 15, 88, 2}));
+        out.println(numberToString(123));
+        out.println(opposite(-3));
+        out.println(positiveSum(new int[]{1, 2, -3, 4, -6}));
+        out.println(abbrevName("sam harris"));
+        out.println(sum(new double[]{1.0, 2.0, 3.0}));
         out.println(convert(false));
         ArrayList<int[]> list = new ArrayList<>();
         list.add(new int[] {10,0});
@@ -81,6 +92,10 @@ public class Main {
         out.println(hero(1938854660, 1551468324));
         out.println(areYouPlayingBanjo("Martin"));
         out.println(isLove(1, 1));
+        out.println(boolToWord(true));
+        out.println(findEvenIndex(new int[]{1, 2, 3, 4, 3, 2, 1}));
+        out.println(whoLikesIt("Peter", "Paul", "Mary"));
+        out.println(check("The quick brown fox jumps over the lazy dog"));
     }
 
     static int jumpingOnClouds(int[] c, int k) {
@@ -760,6 +775,121 @@ public class Main {
     }
 
     /*
+    * Complete the method that takes a boolean value and return a "Yes" string for true, or a "No" string for false.
+    * */
+    public static String boolToWord(boolean b) {
+        if (b)
+            return "Yes";
+        else
+            return "No";
+    }
+    /*
+    * Your task is
+    * to make a function that can take any non-negative integer as an argument
+    * and return it with its digits in descending order.
+    * Essentially, rearrange the digits to create the highest possible number.
+    * */
+    public static int sortDesc(final int num){
+        String[] digits = String.valueOf(num).split("");
+        Arrays.sort(digits, Comparator.reverseOrder());
+        return Integer.parseInt(String.join("", digits));
+    }
+    /*
+    *An isogram is a word that has no repeating letters, consecutive or non-consecutive.
+    * Implement a function that determines whether a string that contains only letters is an isogram. Assume the empty string is an isogram. Ignore letter case.
+     */
+    public static boolean isIsogram(String str) {
+        return str.length() == str.toLowerCase().chars().distinct().count();
+    }
+
+    public static String accum(String s) {
+        String[] letters = s.split("");
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < letters.length; i++) {
+            sb.append(String.format("%s%s", letters[i].toUpperCase(), String.join("", Collections.nCopies(i, letters[i].toLowerCase()))));
+            if (i != letters.length - 1) {
+                sb.append("-");
+            }
+        }
+        return sb.toString();
+    }
+    /*
+    * Complete the square sum function so that it squares each number passed into it and then sums the results together.
+     */
+
+    public static int squareSum(int[] n) {
+        return Arrays.stream(n).map(i -> i * i).sum();
+    }
+
+    /*
+     * Complete the solution so that it reverses the string passed into it.
+     */
+    public static String reverse(String str) {
+        return new StringBuilder(str).reverse().toString();
+    }
+
+    public static int findSmallestInt(int[] args) {
+        OptionalInt min = Arrays.stream(args).min();
+        return min.isPresent() ? min.getAsInt() : 0;
+    }
+
+    /* You are going to be given an array of integers.
+    *  Your job is to take that array and find an index N where the sum of the integers to the left of N is equal to the sum of the integers to the right of N.
+    * If there is no index that would make this happen, return -1.
+    */
+    public static int findEvenIndex(int[] arr) {
+        int leftSum = 0;
+        int rightSum = Arrays.stream(arr).sum();
+        for (int i = 0; i < arr.length; i++) {
+            rightSum -= arr[i];
+            if (leftSum == rightSum) {
+                return i;
+            }
+            leftSum += arr[i];
+        }
+        return -1;
+    }
+
+    /*
+     * We need a function that can transform a number (integer) into a string.
+     * What ways of achieving this do you know?
+     * */
+    public static String numberToString(int num) {
+        return String.valueOf(num);
+    }
+
+    /*
+    *
+    * Very simple, given an integer or a floating-point number, find its opposite.
+    * */
+    public static int opposite(int number) {
+        return -number;
+    }
+
+    /*
+    * You get an array of numbers, return the sum of all of the positives ones.
+    * */
+    public static int positiveSum(int[] arr) {
+        return Arrays.stream(arr).filter(i -> i > 0).sum();
+    }
+
+    /*
+    * Write a function to convert a name into initials. This kata strictly takes two words with one space in between them.
+    The output should be two capital letters with a dot separating them.
+    It should look like this:
+    * */
+    public static String abbrevName(String name) {
+        return name.substring(0, 1).toUpperCase() + "." + name.substring(name.indexOf(' ') + 1).substring(0, 1).toUpperCase();
+    }
+    /*
+    * Write a function that takes an array of numbers and returns the sum of the numbers.
+    * The numbers can be negative or non-integer. If the array does not contain any numbers then you should return 0.
+    * */
+    public static double sum(double[] numbers) {
+        return Arrays.stream(numbers).sum();
+    }
+
+    /*
     * Convert boolean values to strings.
     * */
     public static String convert(boolean b) {
@@ -860,5 +990,33 @@ public class Main {
      */
     public static boolean isLove(final int flower1, final int flower2) {
         return (flower1 % 2 == 0 &&  flower2 % 2 != 0) || (flower1 % 2 != 0 && flower2 % 2 == 0);
+    }
+    /*
+    * You probably know the "like" system from Facebook and other pages. People can "like" blog posts, pictures or other items. We want to create the text that should be displayed next to such an item.
+    * Implement the function which takes an array containing the names of people that like an item.
+    * */
+    public static String whoLikesIt(String... names) {
+        return switch (names.length) {
+            case 0 -> "no one likes this";
+            case 1 -> names[0] + " likes this";
+            case 2 -> names[0] + " and " + names[1] + " like this";
+            case 3 -> names[0] + ", " + names[1] + " and " + names[2] + " like this";
+            default -> names[0] + ", " + names[1] + " and " + (names.length - 2) + " others like this";
+        };
+    }
+
+    /*
+    * A pangram is a sentence that contains every single letter of the alphabet at least once. For example, the sentence "The quick brown fox jumps over the lazy dog" is a pangram, because it uses the letters A-Z at least once (case is irrelevant).
+    * Given a string, detect whether it is a pangram. Return True if it is, False if not. Ignore numbers and punctuation.
+    * */
+    public static boolean check(String sentence) {
+        sentence = sentence.toLowerCase();
+        HashSet<Character> set = new HashSet<>();
+        for (Character  c : sentence.toCharArray()) {
+            if (Character.isLetter(c)) {
+                set.add(c);
+            }
+        }
+        return set.size() == 26;
     }
 }
