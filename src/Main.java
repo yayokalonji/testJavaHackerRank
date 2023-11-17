@@ -96,6 +96,11 @@ public class Main {
         out.println(findEvenIndex(new int[]{1, 2, 3, 4, 3, 2, 1}));
         out.println(whoLikesIt("Peter", "Paul", "Mary"));
         out.println(check("The quick brown fox jumps over the lazy dog"));
+        out.println(evenOrOdd(3));
+        out.println(isValidWalk(new char[]{'n','s','n','s','n','s','n','s','n','s'}));
+        out.println(Arrays.toString(countBy(3, 9)));
+        out.println(Arrays.toString(digitize(123)));
+        out.println(seriesSum(2));
     }
 
     static int jumpingOnClouds(int[] c, int k) {
@@ -1018,5 +1023,86 @@ public class Main {
             }
         }
         return set.size() == 26;
+    }
+
+    /*
+    * Create a function that takes an integer as an argument and returns "Even" for even numbers or "Odd" for odd numbers.
+    * */
+    public static String evenOrOdd(int number) {
+        return number % 2 == 0 ? "Even" : "Odd";
+    }
+
+    /*
+    * You live in the city of Cartesia where all roads are laid out in a perfect grid.
+    * You arrived ten minutes too early to an appointment, so you decided to take the opportunity to go for a short walk.
+    *  The city provides its citizens with a Walk Generating App on their phones -- everytime you press the button it sends you an array of one-letter strings representing directions to walk (eg. ['n', 's', 'w', 'e']).
+    *  You always walk only a single block for each letter (direction) and you know it takes you one minute to traverse one city block,
+    * so create a function that will return true if the walk the app gives you will take you exactly ten minutes (you don't want to be early or late!) and will, of course, return you to your starting point. Return false otherwise.
+    * */
+    public static boolean isValidWalk(char[] walk) {
+        if (walk.length != 10) {
+            return false;
+        }
+
+        int x = 0, y = 0;
+        for (char direction : walk) {
+            switch (direction) {
+                case 'n':
+                    y++;
+                    break;
+                case 's':
+                    y--;
+                    break;
+                case 'e':
+                    x++;
+                    break;
+                case 'w':
+                    x--;
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + direction);
+            }
+        }
+        return x == 0 && y == 0;
+    }
+
+    /*
+    * Create a function with two arguments that will return an array of the first n multiples of x.
+    * Assume both the given number and the number of times to count will be positive numbers greater than 0.
+    * Return the results as an array or list ( depending on language ).
+    * */
+    public static int[] countBy(int x, int n) {
+        int[] result = new int[n];
+        for (int i = 1; i <= n; i++) {
+            result[i - 1] = x * i;
+        }
+        return result;
+    }
+
+    /*
+    * Given a random non-negative number, you have to return the digits of this number within an array in reverse order.
+    * */
+    public static int[] digitize(long n) {
+        String str = new StringBuilder(String.valueOf(n)).reverse().toString();
+        int[] result = new int[str.length()];
+        for (int i = 0; i < str.length(); i++) {
+            result[i] = Integer.parseInt(String.valueOf(str.charAt(i)));
+        }
+        return result;
+    }
+
+    /*
+    * Your task is to write a function which returns the sum of the following series upto nth term(parameter).
+    * Rules:
+    * You need to round the answer to 2 decimal places and return it as String.
+    * If the given value is 0, then it should return 0.00.
+    * You will only be given Natural Numbers as arguments.
+    * */
+    public static String seriesSum(int n) {
+        double sum = 0;
+        for (int i = 1; i <= n; i++) {
+            sum += 1.0 / (3 * i - 2);
+        }
+        return String.format("%.2f", sum);
     }
 }
