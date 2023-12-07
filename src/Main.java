@@ -48,7 +48,6 @@ public class Main {
         out.println(getPINs("11"));
         out.println(alphanumeric("a1b2c3"));
         out.println(solution(10));
-        out.println(isPrime(-1));
         out.println(zeros(12));
         out.println(sumStrings("123", "456"));
         out.println(sequence(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4}));
@@ -68,7 +67,7 @@ public class Main {
         out.println(sortDesc(478673));
         out.println(isIsogram("moose"));
         out.println(accum("abcd"));
-        out.println(squareSum(new int[]{2,2,2}));
+        out.println(squareSum(new int[]{2, 2, 2}));
         out.println(reverse("world"));
         out.println(findSmallestInt(new int[]{34, 15, 88, 2}));
         out.println(numberToString(123));
@@ -78,9 +77,9 @@ public class Main {
         out.println(sum(new double[]{1.0, 2.0, 3.0}));
         out.println(convert(false));
         ArrayList<int[]> list = new ArrayList<>();
-        list.add(new int[] {10,0});
-        list.add(new int[] {3,5});
-        list.add(new int[] {2,5});
+        list.add(new int[]{10, 0});
+        list.add(new int[]{3, 5});
+        list.add(new int[]{2, 5});
         out.println(countPassengers(list));
         Object[] haystack1 = {"3", "123124234", null, "needle", "world", "hay", 2, "3", true, false};
         out.println(findNeedle(haystack1));
@@ -97,14 +96,30 @@ public class Main {
         out.println(whoLikesIt("Peter", "Paul", "Mary"));
         out.println(check("The quick brown fox jumps over the lazy dog"));
         out.println(evenOrOdd(3));
-        out.println(isValidWalk(new char[]{'n','s','n','s','n','s','n','s','n','s'}));
+        out.println(isValidWalk(new char[]{'n', 's', 'n', 's', 'n', 's', 'n', 's', 'n', 's'}));
         out.println(Arrays.toString(countBy(3, 9)));
         out.println(Arrays.toString(digitize(123)));
         out.println(seriesSum(2));
         out.println(isSquare(26));
-        out.println(findIt(new int[]{20,1,-1,2,-2,3,3,5,5,1,2,4,20,4,-1,-2,5}));
+        out.println(findIt(new int[]{20, 1, -1, 2, -2, 3, 3, 5, 5, 1, 2, 4, 20, 4, -1, -2, 5}));
         out.println(Arrays.toString(dirReduc(new String[]{"EAST", "EAST", "WEST", "NORTH", "WEST", "EAST", "EAST", "SOUTH", "NORTH", "WEST"})));
         out.println(Arrays.toString(twoSum(new int[]{1, 2, 3}, 4)));
+        out.println(squareDigits(765));
+        out.println(getCount("abracadabra"));
+        out.println(getMiddle("testing"));
+        out.println(repeatWord(3, "Hello"));
+        out.println(find_average(new int[]{1, 4, 4, 7, 7}));
+        out.println(updateLight("green"));
+        out.println(makeComplete("AAAAA"));
+        out.println(fibonnaci(10));
+        out.println(smash(new String[]{"hello", "world", "this", "is", "great"}));
+        out.println(factorial(5));
+        out.println(doubleInteger(100));
+        out.println(howOld("5 years old"));
+        out.println(isPalindrome("ana"));
+        out.println(isPrime(14));
+        out.println(findNb(1071225));
+        out.println(Arrays.toString(removeEveryOther(new Object[]{"Hello", "Goodbye", "Hello Again"})));
     }
 
     static int jumpingOnClouds(int[] c, int k) {
@@ -506,16 +521,6 @@ public class Main {
         return sum;
     }
 
-    private static boolean isPrime(int num) {
-        if (num <= 1) return false;
-        if (num == 2) return true;
-        if (num % 2 == 0) return false;
-        for (int i = 3; i <= Math.sqrt(num); i += 2) {
-            if (num % i == 0) return false;
-        }
-        return true;
-    }
-
     /*
      * Write a program that will calculate the number of trailing zeros in a factorial of a given number.
      * */
@@ -765,47 +770,51 @@ public class Main {
             return Arrays.stream(phrase.split(" ")).map(i -> i.substring(0, 1).toUpperCase() + i.substring(1)).collect(Collectors.joining(" "));
         }
     }
+
     /*
-    * Make a function that will return a greeting statement that uses an input
-    * your program should return, "Hello, <name> how are you doing today?"
-    * [Make sure you type the exact thing I wrote or the program may not execute properly]
-    * */
+     * Make a function that will return a greeting statement that uses an input
+     * your program should return, "Hello, <name> how are you doing today?"
+     * [Make sure you type the exact thing I wrote or the program may not execute properly]
+     * */
     public static String greet(String name) {
         return String.format("Hello, %s how are you doing today?", name);
     }
+
     /*
-    * It's pretty straightforward.
-    * Your goal is to create a function that removes the first and last characters of a string.
-    * You're given one parameter, the original string.
-    * You don't have to worry about strings with less than two characters.
-    */
+     * It's pretty straightforward.
+     * Your goal is to create a function that removes the first and last characters of a string.
+     * You're given one parameter, the original string.
+     * You don't have to worry about strings with less than two characters.
+     */
     public static String removeChar(String str) {
         return str.substring(1, str.length() - 1);
     }
 
     /*
-    * Complete the method that takes a boolean value and return a "Yes" string for true, or a "No" string for false.
-    * */
+     * Complete the method that takes a boolean value and return a "Yes" string for true, or a "No" string for false.
+     * */
     public static String boolToWord(boolean b) {
         if (b)
             return "Yes";
         else
             return "No";
     }
+
     /*
-    * Your task is
-    * to make a function that can take any non-negative integer as an argument
-    * and return it with its digits in descending order.
-    * Essentially, rearrange the digits to create the highest possible number.
-    * */
-    public static int sortDesc(final int num){
+     * Your task is
+     * to make a function that can take any non-negative integer as an argument
+     * and return it with its digits in descending order.
+     * Essentially, rearrange the digits to create the highest possible number.
+     * */
+    public static int sortDesc(final int num) {
         String[] digits = String.valueOf(num).split("");
         Arrays.sort(digits, Comparator.reverseOrder());
         return Integer.parseInt(String.join("", digits));
     }
+
     /*
-    *An isogram is a word that has no repeating letters, consecutive or non-consecutive.
-    * Implement a function that determines whether a string that contains only letters is an isogram. Assume the empty string is an isogram. Ignore letter case.
+     *An isogram is a word that has no repeating letters, consecutive or non-consecutive.
+     * Implement a function that determines whether a string that contains only letters is an isogram. Assume the empty string is an isogram. Ignore letter case.
      */
     public static boolean isIsogram(String str) {
         return str.length() == str.toLowerCase().chars().distinct().count();
@@ -823,7 +832,7 @@ public class Main {
         return sb.toString();
     }
     /*
-    * Complete the square sum function so that it squares each number passed into it and then sums the results together.
+     * Complete the square sum function so that it squares each number passed into it and then sums the results together.
      */
 
     public static int squareSum(int[] n) {
@@ -843,9 +852,9 @@ public class Main {
     }
 
     /* You are going to be given an array of integers.
-    *  Your job is to take that array and find an index N where the sum of the integers to the left of N is equal to the sum of the integers to the right of N.
-    * If there is no index that would make this happen, return -1.
-    */
+     *  Your job is to take that array and find an index N where the sum of the integers to the left of N is equal to the sum of the integers to the right of N.
+     * If there is no index that would make this happen, return -1.
+     */
     public static int findEvenIndex(int[] arr) {
         int leftSum = 0;
         int rightSum = Arrays.stream(arr).sum();
@@ -868,16 +877,16 @@ public class Main {
     }
 
     /*
-    *
-    * Very simple, given an integer or a floating-point number, find its opposite.
-    * */
+     *
+     * Very simple, given an integer or a floating-point number, find its opposite.
+     * */
     public static int opposite(int number) {
         return -number;
     }
 
     /*
-    * You get an array of numbers, return the sum of all of the positives ones.
-    * */
+     * You get an array of numbers, return the sum of all of the positives ones.
+     * */
     public static int positiveSum(int[] arr) {
         return Arrays.stream(arr).filter(i -> i > 0).sum();
     }
@@ -890,30 +899,31 @@ public class Main {
     public static String abbrevName(String name) {
         return name.substring(0, 1).toUpperCase() + "." + name.substring(name.indexOf(' ') + 1).substring(0, 1).toUpperCase();
     }
+
     /*
-    * Write a function that takes an array of numbers and returns the sum of the numbers.
-    * The numbers can be negative or non-integer. If the array does not contain any numbers then you should return 0.
-    * */
+     * Write a function that takes an array of numbers and returns the sum of the numbers.
+     * The numbers can be negative or non-integer. If the array does not contain any numbers then you should return 0.
+     * */
     public static double sum(double[] numbers) {
         return Arrays.stream(numbers).sum();
     }
 
     /*
-    * Convert boolean values to strings.
-    * */
+     * Convert boolean values to strings.
+     * */
     public static String convert(boolean b) {
         return String.valueOf(b);
     }
 
     /*
-    * There is a bus moving in the city which takes and drops some people at each bus stop.
-    * You are provided with a list (or array) of integer pairs.
-    * Elements of each pair represent the number of people that get on the bus (the first item) and the number of people that get off the bus (the second item) at a bus stop.
-    * Your task is to return the number of people who are still on the bus after the last bus stop (after the last array).
-    * Even though it is the last bus stop, the bus might not be empty and some people might still be inside the bus, they are probably sleeping there :D
-    * Take a look on the test cases. Please keep in mind that the test cases ensure that the number of people in the bus is always >= 0. So the returned integer can't be negative.
-    * The second value in the first pair in the array is 0, since the bus is empty in the first bus stop.
-    * */
+     * There is a bus moving in the city which takes and drops some people at each bus stop.
+     * You are provided with a list (or array) of integer pairs.
+     * Elements of each pair represent the number of people that get on the bus (the first item) and the number of people that get off the bus (the second item) at a bus stop.
+     * Your task is to return the number of people who are still on the bus after the last bus stop (after the last array).
+     * Even though it is the last bus stop, the bus might not be empty and some people might still be inside the bus, they are probably sleeping there :D
+     * Take a look on the test cases. Please keep in mind that the test cases ensure that the number of people in the bus is always >= 0. So the returned integer can't be negative.
+     * The second value in the first pair in the array is 0, since the bus is empty in the first bus stop.
+     * */
     public static int countPassengers(ArrayList<int[]> stops) {
         int result = 0;
         for (int[] stop : stops) {
@@ -923,42 +933,44 @@ public class Main {
     }
 
     /*
-    * Find the needle in the haystack.
-    * */
-    public static String findNeedle(Object [] haystack){
+     * Find the needle in the haystack.
+     * */
+    public static String findNeedle(Object[] haystack) {
         return "found the needle at position " + Arrays.asList(haystack).indexOf("needle");
     }
 
     /*
-    * Build a pyramid-shaped tower, as an array/list of strings, given a positive integer number of floors. A tower block is represented with "*" character.
-    * */
-    public static String[]  towerBuilder(int nFloors) {
+     * Build a pyramid-shaped tower, as an array/list of strings, given a positive integer number of floors. A tower block is represented with "*" character.
+     * */
+    public static String[] towerBuilder(int nFloors) {
         String[] result = new String[nFloors];
         for (int i = 1; i <= nFloors; i++) {
             String spaces = " ".repeat(nFloors - i);
             String blocks = "*".repeat(i * 2 - 1);
             String floor = spaces + blocks + spaces;
-            result[i- 1] = floor;
+            result[i - 1] = floor;
         }
         return result;
     }
+
     /*
-    * Write a function that removes the spaces from the string, then return the resultant string.
-    * */
+     * Write a function that removes the spaces from the string, then return the resultant string.
+     * */
     public static String noSpace(final String x) {
         return x.replace(" ", "");
     }
 
     /*
-    * We need a function that can transform a string into a number. What ways of achieving this do you know?
-    * Note: Don't worry, all inputs will be strings, and every string is a perfectly valid representation of an integral number.
-    * */
+     * We need a function that can transform a string into a number. What ways of achieving this do you know?
+     * Note: Don't worry, all inputs will be strings, and every string is a perfectly valid representation of an integral number.
+     * */
     public static int stringToNumber(String str) {
-        return Integer.parseInt(str) ;
+        return Integer.parseInt(str);
     }
+
     /*
-    * Consider an array/list of sheep where some sheep may be missing from their place. We need a function that counts the number of sheep present in the array (true means present).
-    * */
+     * Consider an array/list of sheep where some sheep may be missing from their place. We need a function that counts the number of sheep present in the array (true means present).
+     * */
     public static int countSheep(Boolean[] arrayOfSheep) {
         int count = 0;
         for (Boolean sheep : arrayOfSheep) {
@@ -970,27 +982,27 @@ public class Main {
     }
 
     /*
-    * Implement a function that adds two numbers together and returns their sum in binary. The conversion can be done before, or after the addition.
-    * The binary number returned should be a string.
-    * */
-    public static String binaryAddition(int a, int b){
+     * Implement a function that adds two numbers together and returns their sum in binary. The conversion can be done before, or after the addition.
+     * The binary number returned should be a string.
+     * */
+    public static String binaryAddition(int a, int b) {
         return Integer.toBinaryString(a + b);
     }
 
     /*
-    * A hero is on his way to the castle to complete his mission. However, he's been told that the castle is surrounded with a couple of powerful dragons! each dragon takes 2 bullets to be defeated,
-    * our hero has no idea how many bullets he should carry.
-    * Assuming he's going to grab a specific given number of bullets and move forward to fight another specific given number of dragons, will he survive?
-    * Return true if yes, false otherwise :)
-    * */
-    public static boolean hero(int bullets, int dragons){
+     * A hero is on his way to the castle to complete his mission. However, he's been told that the castle is surrounded with a couple of powerful dragons! each dragon takes 2 bullets to be defeated,
+     * our hero has no idea how many bullets he should carry.
+     * Assuming he's going to grab a specific given number of bullets and move forward to fight another specific given number of dragons, will he survive?
+     * Return true if yes, false otherwise :)
+     * */
+    public static boolean hero(int bullets, int dragons) {
         return Double.parseDouble(String.valueOf(bullets)) >= 2 * Double.parseDouble(String.valueOf(dragons));
     }
 
     /*
-    * */
+     * */
     public static String areYouPlayingBanjo(String name) {
-        return name.toLowerCase().startsWith("r") ? name +" plays banjo" :  name + " does not play banjo";
+        return name.toLowerCase().startsWith("r") ? name + " plays banjo" : name + " does not play banjo";
     }
 
     /**
@@ -998,12 +1010,13 @@ public class Main {
      * Write a function that will take the number of petals of each flower and return true if they are in love and false if they aren't.
      */
     public static boolean isLove(final int flower1, final int flower2) {
-        return (flower1 % 2 == 0 &&  flower2 % 2 != 0) || (flower1 % 2 != 0 && flower2 % 2 == 0);
+        return (flower1 % 2 == 0 && flower2 % 2 != 0) || (flower1 % 2 != 0 && flower2 % 2 == 0);
     }
+
     /*
-    * You probably know the "like" system from Facebook and other pages. People can "like" blog posts, pictures or other items. We want to create the text that should be displayed next to such an item.
-    * Implement the function which takes an array containing the names of people that like an item.
-    * */
+     * You probably know the "like" system from Facebook and other pages. People can "like" blog posts, pictures or other items. We want to create the text that should be displayed next to such an item.
+     * Implement the function which takes an array containing the names of people that like an item.
+     * */
     public static String whoLikesIt(String... names) {
         return switch (names.length) {
             case 0 -> "no one likes this";
@@ -1015,13 +1028,13 @@ public class Main {
     }
 
     /*
-    * A pangram is a sentence that contains every single letter of the alphabet at least once. For example, the sentence "The quick brown fox jumps over the lazy dog" is a pangram, because it uses the letters A-Z at least once (case is irrelevant).
-    * Given a string, detect whether it is a pangram. Return True if it is, False if not. Ignore numbers and punctuation.
-    * */
+     * A pangram is a sentence that contains every single letter of the alphabet at least once. For example, the sentence "The quick brown fox jumps over the lazy dog" is a pangram, because it uses the letters A-Z at least once (case is irrelevant).
+     * Given a string, detect whether it is a pangram. Return True if it is, False if not. Ignore numbers and punctuation.
+     * */
     public static boolean check(String sentence) {
         sentence = sentence.toLowerCase();
         HashSet<Character> set = new HashSet<>();
-        for (Character  c : sentence.toCharArray()) {
+        for (Character c : sentence.toCharArray()) {
             if (Character.isLetter(c)) {
                 set.add(c);
             }
@@ -1030,19 +1043,19 @@ public class Main {
     }
 
     /*
-    * Create a function that takes an integer as an argument and returns "Even" for even numbers or "Odd" for odd numbers.
-    * */
+     * Create a function that takes an integer as an argument and returns "Even" for even numbers or "Odd" for odd numbers.
+     * */
     public static String evenOrOdd(int number) {
         return number % 2 == 0 ? "Even" : "Odd";
     }
 
     /*
-    * You live in the city of Cartesia where all roads are laid out in a perfect grid.
-    * You arrived ten minutes too early to an appointment, so you decided to take the opportunity to go for a short walk.
-    *  The city provides its citizens with a Walk Generating App on their phones -- everytime you press the button it sends you an array of one-letter strings representing directions to walk (eg. ['n', 's', 'w', 'e']).
-    *  You always walk only a single block for each letter (direction) and you know it takes you one minute to traverse one city block,
-    * so create a function that will return true if the walk the app gives you will take you exactly ten minutes (you don't want to be early or late!) and will, of course, return you to your starting point. Return false otherwise.
-    * */
+     * You live in the city of Cartesia where all roads are laid out in a perfect grid.
+     * You arrived ten minutes too early to an appointment, so you decided to take the opportunity to go for a short walk.
+     *  The city provides its citizens with a Walk Generating App on their phones -- everytime you press the button it sends you an array of one-letter strings representing directions to walk (eg. ['n', 's', 'w', 'e']).
+     *  You always walk only a single block for each letter (direction) and you know it takes you one minute to traverse one city block,
+     * so create a function that will return true if the walk the app gives you will take you exactly ten minutes (you don't want to be early or late!) and will, of course, return you to your starting point. Return false otherwise.
+     * */
     public static boolean isValidWalk(char[] walk) {
         if (walk.length != 10) {
             return false;
@@ -1071,10 +1084,10 @@ public class Main {
     }
 
     /*
-    * Create a function with two arguments that will return an array of the first n multiples of x.
-    * Assume both the given number and the number of times to count will be positive numbers greater than 0.
-    * Return the results as an array or list ( depending on language ).
-    * */
+     * Create a function with two arguments that will return an array of the first n multiples of x.
+     * Assume both the given number and the number of times to count will be positive numbers greater than 0.
+     * Return the results as an array or list ( depending on language ).
+     * */
     public static int[] countBy(int x, int n) {
         int[] result = new int[n];
         for (int i = 1; i <= n; i++) {
@@ -1084,8 +1097,8 @@ public class Main {
     }
 
     /*
-    * Given a random non-negative number, you have to return the digits of this number within an array in reverse order.
-    * */
+     * Given a random non-negative number, you have to return the digits of this number within an array in reverse order.
+     * */
     public static int[] digitize(long n) {
         String str = new StringBuilder(String.valueOf(n)).reverse().toString();
         int[] result = new int[str.length()];
@@ -1096,12 +1109,12 @@ public class Main {
     }
 
     /*
-    * Your task is to write a function which returns the sum of the following series upto nth term(parameter).
-    * Rules:
-    * You need to round the answer to 2 decimal places and return it as String.
-    * If the given value is 0, then it should return 0.00.
-    * You will only be given Natural Numbers as arguments.
-    * */
+     * Your task is to write a function which returns the sum of the following series upto nth term(parameter).
+     * Rules:
+     * You need to round the answer to 2 decimal places and return it as String.
+     * If the given value is 0, then it should return 0.00.
+     * You will only be given Natural Numbers as arguments.
+     * */
     public static String seriesSum(int n) {
         double sum = 0;
         for (int i = 1; i <= n; i++) {
@@ -1111,8 +1124,8 @@ public class Main {
     }
 
     /*
-    * A square of squares
-    * */
+     * A square of squares
+     * */
     public static boolean isSquare(int n) {
         return Math.sqrt(n) % 1 == 0;
     }
@@ -1126,42 +1139,42 @@ public class Main {
     }
 
     /*
-    * Once upon a time, on a way through the old wild mountainous west,…
-    *  a man was given directions to go from one point to another. The directions were "NORTH", "SOUTH", "WEST", "EAST". Clearly "NORTH" and "SOUTH" are opposite, "WEST" and "EAST" too.
-    * Going to one direction and coming back the opposite direction right away is a needless effort.
-    * Since this is the wild west, with dreadful weather and not much water, it's important to save yourself some energy; otherwise you might die of thirst!
-    * How I crossed a mountainous desert the smart way.
-    * The directions given to the man are, for example, the following (depending on the language):
-    *
-    * ["NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST"].
-    * or
-    * { "NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST" };
-    * or
-    * [North, South, South, East, West, North, West]
-    *
-    * You can immediately see that going "NORTH" and immediately "SOUTH" is not reasonable, better stay to the same place! So the task is to give to the man a simplified version of the plan.
-    * A better plan in this case is simple:
-    *
-    * ["WEST"]
-    * or
-    * { "WEST" }
-    * or
-    * [West]
-    *
-    * Other examples:
-    * In ["NORTH", "SOUTH", "EAST", "WEST"], the direction "NORTH" + "SOUTH" is going north and coming back right away.
-    * The path becomes ["EAST", "WEST"], now "EAST" and "WEST" annihilate each other, therefore, the final result is [] (nil in Clojure).
-    * In ["NORTH", "EAST", "WEST", "SOUTH", "WEST", "WEST"], "NORTH" and "SOUTH" are not directly opposite but they become directly opposite after the reduction of "EAST" and "WEST" so the whole path is reducible to ["WEST", "WEST"].
-    * Task Write a function dirReduc which will take an array of strings and returns an array of strings with the needless directions removed (W<->E or S<->N side by side).
-    * The Haskell version takes a list of directions with data Direction = North | East | West | South.
-    * The Clojure version returns nil when the path is reduced to nothing.The Rust version takes a slice of enum Direction {North, East, West, South}.
-    * See more examples in "Sample Tests:"
-    * Notes
-    * Not all paths can be made simpler. The path ["NORTH", "WEST", "SOUTH", "EAST"] is not reducible. "NORTH" and "WEST", "WEST" and "SOUTH",
-    * "SOUTH" and "EAST" are not directly opposite of each other and can't become such. Hence the result path is itself : ["NORTH", "WEST", "SOUTH", "EAST"].
-    * if you want to translate, please ask before translating.
-    * */
-    public static String[] dirReduc(String [] arr){
+     * Once upon a time, on a way through the old wild mountainous west,…
+     *  a man was given directions to go from one point to another. The directions were "NORTH", "SOUTH", "WEST", "EAST". Clearly "NORTH" and "SOUTH" are opposite, "WEST" and "EAST" too.
+     * Going to one direction and coming back the opposite direction right away is a needless effort.
+     * Since this is the wild west, with dreadful weather and not much water, it's important to save yourself some energy; otherwise you might die of thirst!
+     * How I crossed a mountainous desert the smart way.
+     * The directions given to the man are, for example, the following (depending on the language):
+     *
+     * ["NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST"].
+     * or
+     * { "NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST" };
+     * or
+     * [North, South, South, East, West, North, West]
+     *
+     * You can immediately see that going "NORTH" and immediately "SOUTH" is not reasonable, better stay to the same place! So the task is to give to the man a simplified version of the plan.
+     * A better plan in this case is simple:
+     *
+     * ["WEST"]
+     * or
+     * { "WEST" }
+     * or
+     * [West]
+     *
+     * Other examples:
+     * In ["NORTH", "SOUTH", "EAST", "WEST"], the direction "NORTH" + "SOUTH" is going north and coming back right away.
+     * The path becomes ["EAST", "WEST"], now "EAST" and "WEST" annihilate each other, therefore, the final result is [] (nil in Clojure).
+     * In ["NORTH", "EAST", "WEST", "SOUTH", "WEST", "WEST"], "NORTH" and "SOUTH" are not directly opposite but they become directly opposite after the reduction of "EAST" and "WEST" so the whole path is reducible to ["WEST", "WEST"].
+     * Task Write a function dirReduc which will take an array of strings and returns an array of strings with the needless directions removed (W<->E or S<->N side by side).
+     * The Haskell version takes a list of directions with data Direction = North | East | West | South.
+     * The Clojure version returns nil when the path is reduced to nothing.The Rust version takes a slice of enum Direction {North, East, West, South}.
+     * See more examples in "Sample Tests:"
+     * Notes
+     * Not all paths can be made simpler. The path ["NORTH", "WEST", "SOUTH", "EAST"] is not reducible. "NORTH" and "WEST", "WEST" and "SOUTH",
+     * "SOUTH" and "EAST" are not directly opposite of each other and can't become such. Hence the result path is itself : ["NORTH", "WEST", "SOUTH", "EAST"].
+     * if you want to translate, please ask before translating.
+     * */
+    public static String[] dirReduc(String[] arr) {
         Map<String, String> opposites = new HashMap<>();
         opposites.put("NORTH", "SOUTH");
         opposites.put("SOUTH", "NORTH");
@@ -1179,7 +1192,7 @@ public class Main {
     }
 
     public static int[] twoSum(int[] numbers, int target) {
-        int [] result = {};
+        int[] result = {};
         for (int i = 0; i < numbers.length; i++) {
             for (int j = i + 1; j < numbers.length; j++) {
                 if (numbers[j] + numbers[i] == target) {
@@ -1188,5 +1201,207 @@ public class Main {
             }
         }
         return result;
+    }
+
+    /*
+     * Welcome.In this kata, you are asked to square every digit of a number and concatenate them.
+     * For example, if we run 9119 through the function, 811181 will come out, because 92 is 81 and 12 is 1. (81-1-1-81)
+     * Example #2: An input of 765 will/should return 493625 because 72 is 49, 62 is 36, and 52 is 25. (49-36-25)
+     * Note: The function accepts an integer and returns an integer.
+     * Happy Coding!
+     * */
+    public static int squareDigits(int n) {
+        String str = String.valueOf(n);
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < str.length(); i++) {
+            int digit = Integer.parseInt(String.valueOf(str.charAt(i)));
+            result.append(digit * digit);
+        }
+        return Integer.parseInt(result.toString());
+    }
+
+    /*
+     * Some numbers have funny properties. For example:
+     * 89 --> 8¹ + 9² = 89 * 1
+     * 695 --> 6² + 9³ + 5⁴= 1390 = 695 * 2
+     * 46288 --> 4³ + 6⁴+ 2⁵ + 8⁶ + 8⁷ = 2360688 = 46288 * 51
+     * Given a positive integer n written as abcd... (a, b, c, d... being digits) and a positive integer p
+     * we want to find a positive integer k, if it exists, such that the sum of the digits of n taken to the successive powers of p is equal to k * n.
+     * In other words:
+     * Is there an integer k such as : (a ^ p + b ^ (p+1) + c ^(p+2) + d ^ (p+3) + ...) = n * k
+     * If it is the case we will return k, if not return -1.
+     * Note: n and p will always be given as strictly positive integers.
+     */
+    public static int digPow(int n, int p) {
+        int sum = 0;
+        String str = String.valueOf(n);
+        for (int i = 0; i < str.length(); i++) {
+            int digit = Integer.parseInt(String.valueOf(str.charAt(i)));
+            sum += (int) Math.pow(digit, p + i);
+        }
+        return sum % n == 0 ? sum / n : -1;
+    }
+
+    /*
+     * Count the number of vowels in a given string.
+     * */
+    public static int getCount(String str) {
+        return (int) str.chars().filter(c -> "aeiou".indexOf(c) >= 0).count();
+    }
+
+    /*
+     * Get the Middle Character
+     * */
+    public static String getMiddle(String word) {
+        if (word.length() % 2 == 0) {
+            return word.substring(word.length() / 2 - 1, word.length() / 2 + 1);
+        } else {
+            return word.substring(word.length() / 2, word.length() / 2 + 1);
+        }
+    }
+
+    /*
+     * Repeat a given string (first argument) num times (second argument).Return an empty string if num is not a positive number.
+     * */
+    public static String repeatWord(final int repeat, final String string) {
+        return string.repeat(repeat);
+    }
+
+    /* Average give array */
+    public static double find_average(int[] array) {
+        return Arrays.stream(array).average().orElse(0);
+    }
+
+    /*
+     * Change to next traffic light
+     * */
+    public static String updateLight(String current) {
+        return "green".equals(current) ? "yellow" : "yellow".equals(current) ? "red" : "green";
+    }
+
+    public static String makeComplete(String dna) {
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < dna.length(); i++) {
+            if ('A' == (dna.charAt(i))) {
+                result.append("T");
+            } else if ('T' == dna.charAt(i)) {
+                result.append("A");
+            } else if ('C' == dna.charAt(i)) {
+                result.append("G");
+            } else if ('G' == dna.charAt(i)) {
+                result.append("C");
+            }
+        }
+        return result.toString();
+    }
+
+    /*
+     * Serie fibonnaci
+     * */
+    public static int fibonnaci(int n) {
+        if (n <= 1) {
+            return n;
+        }
+        int firtsValue = 0;
+        int secondValue = 1;
+        int current = 0;
+        for (int i = 2; i <= n; i++) {
+            current = firtsValue + secondValue;
+            firtsValue = secondValue;
+            secondValue = current;
+        }
+        return current;
+    }
+
+    public static String smash(String... words) {
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < words.length; i++) {
+            if (i != 0)
+                result.append(" ");
+            result.append(words[i]);
+        }
+        return result.toString();
+    }
+
+    public static int factorial(int n) {
+        if (n == 0) {
+            return 1;
+        }
+        for (int i = n - 1; i > 0; i--) {
+            n *= i;
+        }
+        return n;
+    }
+
+    /*
+     * Code as fast as you can! You need to double the integer and return it.
+     * */
+    public static int doubleInteger(int i) {
+        return i * 2;
+    }
+
+    /*
+     * You ask a small girl, "How old are you?" She always says, "x years old", where x is a random number between 0 and 9.
+     * Write a program that returns the girl's age (0-9) as an integer.
+     * Assume the test input string is always a valid string. For example, the test input may be "1-year-old" or "5 years old". The first character in the string is always a number.
+     * */
+    public static int howOld(final String herOld) {
+        return Integer.parseInt(herOld.split(" ")[0]);
+    }
+
+    /*
+     * Word Palindrome
+     * */
+    public static boolean isPalindrome(String str) {
+        int mid = str.length() / 2;
+        for (int i = 0; i <= mid; i++) {
+            if (str.charAt(i) != str.charAt(str.length() - i - 1)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /*
+     * Number prime
+     * */
+    public static boolean isPrime(int n) {
+        if (n == 1) {
+            return false;
+        }
+        for (int i = 2; i < n; i++) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /*
+     * Your task is to construct a building which will be a pile of n cubes.The cube at the bottom will have a volume of n^3
+     * and the rest of the cubes will have a volume of n^3, the cube above will have volume of (n-1)^3  and so on until the top which will have a volume of
+     * 1^3.You are given the total volume m of the building.Being given m can you find the number n of cubes you will have to build?
+     * */
+    public static int findNb(long m) {
+        long volume = 0;
+        int n = 0;
+        while (volume < m) {
+            n++;
+            volume += (long) Math.pow(n, 3);
+        }
+        return volume == m ? n : -1;
+    }
+
+    /*
+     * Take an array and remove every second element from the array. Always keep the first element and start removing with the next element.
+     * */
+    public static Object[] removeEveryOther(Object[] a) {
+        List<Object> result = new ArrayList<>();
+        for (int i = 0; i < a.length; i++) {
+            if (i % 2 == 0) {
+                result.add(a[i]);
+            }
+        }
+        return result.toArray();
     }
 }
