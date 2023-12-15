@@ -120,6 +120,13 @@ public class Main {
         out.println(isPrime(14));
         out.println(findNb(1071225));
         out.println(Arrays.toString(removeEveryOther(new Object[]{"Hello", "Goodbye", "Hello Again"})));
+        out.println(number(Arrays.asList("1", "2","3", "4"," 5")));
+        out.println(checkForFactor(2450, 5));
+        out.println(correct("FGDKHJFD05GSSLK"));
+        out.println(stray(new int[]{1, 1, 2}));
+        out.println(bouncingBall(30, 0.66, 1.5));
+        out.println(rentalCarCost(6));
+        out.println(saleHotDogs(9));
     }
 
     static int jumpingOnClouds(int[] c, int k) {
@@ -1403,5 +1410,112 @@ public class Main {
             }
         }
         return result.toArray();
+    }
+    /*
+    * Your team is writing a fancy new text editor, and you've been tasked with implementing the line numbering.
+    * Write a function which takes a list of strings and returns each line prepended by the correct number.
+    * The numbering starts at 1. The format is n: string. Notice the colon and space in between.
+    * */
+    public static List<String> number(List<String> lines) {
+        List<String> result = new ArrayList<>();
+        for (int i = 0; i < lines.size(); i++) {
+            result.add((i + 1) + ": " + lines.get(i));
+        }
+        return result;
+    }
+    /*
+    * This function should test if the factor is a factor of base.
+    * Return true if it is a factor or false if it is not.
+    * About factors are numbers you can multiply together to get another number.
+    * 2 and 3 are factors of 6 because: 2 * 3 = 6
+    * You can find a factor by dividing numbers. If the remainder is 0, then the number is a factor.
+    * You can use the mod operator (%) in most languages to check for a remainder -
+    * For example; 2 is not a factor of 7 because: 7 % 2 = 1
+    * Note: base is a non-negative number, a factor is a positive number.
+    * */
+    public static boolean checkForFactor(int base, int factor) {
+        return base % factor == 0;
+    }
+    /*
+    * Character recognition software is widely used to digitize printed texts.
+    * Thus, the texts can be edited, searched and stored on a computer.
+    * When documents (especially pretty old ones written with a typewriter),
+    * are digitized character recognition pieces of software often make mistakes.
+    * Your task is to correct the errors in the digitized text.
+    * You only have to handle the following mistakes:
+    * S is misinterpreted as 5
+    * O is misinterpreted as 0
+    * I is misinterpreted as 1
+    * The test cases contain numbers only by mistake.
+    * */
+    public static String correct(String string) {
+        return string.replace('5', 'S').replace('0', 'O').replace('1', 'I');
+    }
+    /*
+    * You are given an odd-length array of integers, in which all of them are the same, except for one single number.
+    * Complete the method which accepts such an array, and returns that single different number.
+    * The input array will always be valid!
+    * (Odd-length >= 3)
+    * */
+    public static int stray(int[] numbers) {
+        Arrays.sort(numbers);
+        return numbers[0] == numbers[1] ? numbers[numbers.length - 1] : numbers[0];
+    }
+
+    /*
+    * A child is playing with a ball on the nth floor of a tall building.The height of this floor above ground level,h,is known.
+    * He drops the ball out of the window.The ball bounces (for example), to two-thirds of its height(a bounce of 0.66).
+    * His mother looks out of a window 1.5 meters from the ground.
+    * How many times will the mother see the ball pass in front of her window
+    * (including when it's falling and bouncing)?
+    * Three conditions must be met for a valid experiment:
+    * Float parameter "h" in meters must be greater than 0
+    * Float parameter "bounces" must be greater than 0 and less than 1
+    * Float parameter "window" must be less than h.
+    * If all three conditions above are fulfilled, return a positive integer, otherwise return -1.
+    * Note:
+    * The ball can only be seen
+    * if the height of the rebounding ball is strictly greater than the window parameter.
+    * */
+    public static int bouncingBall(double h, double bounce, double window) {
+        if (h <= 0 || bounce <= 0 || bounce >= 1 || window >= h) {
+            return -1;
+        }
+        int count = 1;
+        double ballHeight = h;
+        while (ballHeight * bounce > window) {
+            count += 2;
+            ballHeight *= bounce;
+        }
+        return count;
+    }
+    /*
+    * After a hard quarter in the office, you decide to get some rest on a vacation.
+    * So you will book a flight for you and your girlfriend and try to leave all the mess behind you.
+    * You will need a rental car in order for you to get around on your vacation.
+    * The manager of the car rental makes you some good offers.
+    * Every day you rent the car costs $40.
+    * If you rent the car for 7 or more days, you get $50 off your total.
+    * Alternatively, if you rent the car for 3 or more days, you get $20 off your total.
+    * Write a code that gives out the total amount for different days(d).
+    * */
+    public static int rentalCarCost(int d) {
+        int total = d * 40;
+        if (d >= 7) {
+            total -= 50;
+        } else if (d >= 3) {
+            total -= 20;
+        }
+        return total;
+    }
+
+    public static int saleHotDogs(final int n){
+        if (n < 5){
+            return n * 100;
+        }else if (n < 10){
+            return n * 95;
+        } else {
+            return n * 90;
+        }
     }
 }
