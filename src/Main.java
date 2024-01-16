@@ -120,13 +120,22 @@ public class Main {
         out.println(isPrime(14));
         out.println(findNb(1071225));
         out.println(Arrays.toString(removeEveryOther(new Object[]{"Hello", "Goodbye", "Hello Again"})));
-        out.println(number(Arrays.asList("1", "2","3", "4"," 5")));
+        out.println(number(Arrays.asList("1", "2", "3", "4", " 5")));
         out.println(checkForFactor(2450, 5));
         out.println(correct("FGDKHJFD05GSSLK"));
         out.println(stray(new int[]{1, 1, 2}));
         out.println(bouncingBall(30, 0.66, 1.5));
         out.println(rentalCarCost(6));
         out.println(saleHotDogs(9));
+        out.println(numberOfDivisors(12));
+        out.println(nbDig(5750, 0));
+        out.println(min(new int[]{-52,56,30,29,-54,0,-110}));
+        out.println(max(new int[]{-52,56,30,29,-54,0,-110}));
+        out.println(minimum(new int[]{-52,56,30,29,-54,0,-110}));
+        out.println(maximum(new int[]{-52,56,30,29,-54,0,-110}));
+        out.println(minSpecialValue(7, new int[]{37, 91, 29, 58, 45, 51, 74}, 4));
+        out.println(Arrays.toString(solution(5, 4, new int[]{0, 1, 0, 4})));
+        out.println(can_get_word("A"));
     }
 
     static int jumpingOnClouds(int[] c, int k) {
@@ -801,10 +810,8 @@ public class Main {
      * Complete the method that takes a boolean value and return a "Yes" string for true, or a "No" string for false.
      * */
     public static String boolToWord(boolean b) {
-        if (b)
-            return "Yes";
-        else
-            return "No";
+        if (b) return "Yes";
+        else return "No";
     }
 
     /*
@@ -1323,8 +1330,7 @@ public class Main {
     public static String smash(String... words) {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < words.length; i++) {
-            if (i != 0)
-                result.append(" ");
+            if (i != 0) result.append(" ");
             result.append(words[i]);
         }
         return result.toString();
@@ -1411,11 +1417,12 @@ public class Main {
         }
         return result.toArray();
     }
+
     /*
-    * Your team is writing a fancy new text editor, and you've been tasked with implementing the line numbering.
-    * Write a function which takes a list of strings and returns each line prepended by the correct number.
-    * The numbering starts at 1. The format is n: string. Notice the colon and space in between.
-    * */
+     * Your team is writing a fancy new text editor, and you've been tasked with implementing the line numbering.
+     * Write a function which takes a list of strings and returns each line prepended by the correct number.
+     * The numbering starts at 1. The format is n: string. Notice the colon and space in between.
+     * */
     public static List<String> number(List<String> lines) {
         List<String> result = new ArrayList<>();
         for (int i = 0; i < lines.size(); i++) {
@@ -1423,60 +1430,63 @@ public class Main {
         }
         return result;
     }
+
     /*
-    * This function should test if the factor is a factor of base.
-    * Return true if it is a factor or false if it is not.
-    * About factors are numbers you can multiply together to get another number.
-    * 2 and 3 are factors of 6 because: 2 * 3 = 6
-    * You can find a factor by dividing numbers. If the remainder is 0, then the number is a factor.
-    * You can use the mod operator (%) in most languages to check for a remainder -
-    * For example; 2 is not a factor of 7 because: 7 % 2 = 1
-    * Note: base is a non-negative number, a factor is a positive number.
-    * */
+     * This function should test if the factor is a factor of base.
+     * Return true if it is a factor or false if it is not.
+     * About factors are numbers you can multiply together to get another number.
+     * 2 and 3 are factors of 6 because: 2 * 3 = 6
+     * You can find a factor by dividing numbers. If the remainder is 0, then the number is a factor.
+     * You can use the mod operator (%) in most languages to check for a remainder -
+     * For example; 2 is not a factor of 7 because: 7 % 2 = 1
+     * Note: base is a non-negative number, a factor is a positive number.
+     * */
     public static boolean checkForFactor(int base, int factor) {
         return base % factor == 0;
     }
+
     /*
-    * Character recognition software is widely used to digitize printed texts.
-    * Thus, the texts can be edited, searched and stored on a computer.
-    * When documents (especially pretty old ones written with a typewriter),
-    * are digitized character recognition pieces of software often make mistakes.
-    * Your task is to correct the errors in the digitized text.
-    * You only have to handle the following mistakes:
-    * S is misinterpreted as 5
-    * O is misinterpreted as 0
-    * I is misinterpreted as 1
-    * The test cases contain numbers only by mistake.
-    * */
+     * Character recognition software is widely used to digitize printed texts.
+     * Thus, the texts can be edited, searched and stored on a computer.
+     * When documents (especially pretty old ones written with a typewriter),
+     * are digitized character recognition pieces of software often make mistakes.
+     * Your task is to correct the errors in the digitized text.
+     * You only have to handle the following mistakes:
+     * S is misinterpreted as 5
+     * O is misinterpreted as 0
+     * I is misinterpreted as 1
+     * The test cases contain numbers only by mistake.
+     * */
     public static String correct(String string) {
         return string.replace('5', 'S').replace('0', 'O').replace('1', 'I');
     }
+
     /*
-    * You are given an odd-length array of integers, in which all of them are the same, except for one single number.
-    * Complete the method which accepts such an array, and returns that single different number.
-    * The input array will always be valid!
-    * (Odd-length >= 3)
-    * */
+     * You are given an odd-length array of integers, in which all of them are the same, except for one single number.
+     * Complete the method which accepts such an array, and returns that single different number.
+     * The input array will always be valid!
+     * (Odd-length >= 3)
+     * */
     public static int stray(int[] numbers) {
         Arrays.sort(numbers);
         return numbers[0] == numbers[1] ? numbers[numbers.length - 1] : numbers[0];
     }
 
     /*
-    * A child is playing with a ball on the nth floor of a tall building.The height of this floor above ground level,h,is known.
-    * He drops the ball out of the window.The ball bounces (for example), to two-thirds of its height(a bounce of 0.66).
-    * His mother looks out of a window 1.5 meters from the ground.
-    * How many times will the mother see the ball pass in front of her window
-    * (including when it's falling and bouncing)?
-    * Three conditions must be met for a valid experiment:
-    * Float parameter "h" in meters must be greater than 0
-    * Float parameter "bounces" must be greater than 0 and less than 1
-    * Float parameter "window" must be less than h.
-    * If all three conditions above are fulfilled, return a positive integer, otherwise return -1.
-    * Note:
-    * The ball can only be seen
-    * if the height of the rebounding ball is strictly greater than the window parameter.
-    * */
+     * A child is playing with a ball on the nth floor of a tall building.The height of this floor above ground level,h,is known.
+     * He drops the ball out of the window.The ball bounces (for example), to two-thirds of its height(a bounce of 0.66).
+     * His mother looks out of a window 1.5 meters from the ground.
+     * How many times will the mother see the ball pass in front of her window
+     * (including when it's falling and bouncing)?
+     * Three conditions must be met for a valid experiment:
+     * Float parameter "h" in meters must be greater than 0
+     * Float parameter "bounces" must be greater than 0 and less than 1
+     * Float parameter "window" must be less than h.
+     * If all three conditions above are fulfilled, return a positive integer, otherwise return -1.
+     * Note:
+     * The ball can only be seen
+     * if the height of the rebounding ball is strictly greater than the window parameter.
+     * */
     public static int bouncingBall(double h, double bounce, double window) {
         if (h <= 0 || bounce <= 0 || bounce >= 1 || window >= h) {
             return -1;
@@ -1489,16 +1499,17 @@ public class Main {
         }
         return count;
     }
+
     /*
-    * After a hard quarter in the office, you decide to get some rest on a vacation.
-    * So you will book a flight for you and your girlfriend and try to leave all the mess behind you.
-    * You will need a rental car in order for you to get around on your vacation.
-    * The manager of the car rental makes you some good offers.
-    * Every day you rent the car costs $40.
-    * If you rent the car for 7 or more days, you get $50 off your total.
-    * Alternatively, if you rent the car for 3 or more days, you get $20 off your total.
-    * Write a code that gives out the total amount for different days(d).
-    * */
+     * After a hard quarter in the office, you decide to get some rest on a vacation.
+     * So you will book a flight for you and your girlfriend and try to leave all the mess behind you.
+     * You will need a rental car in order for you to get around on your vacation.
+     * The manager of the car rental makes you some good offers.
+     * Every day you rent the car costs $40.
+     * If you rent the car for 7 or more days, you get $50 off your total.
+     * Alternatively, if you rent the car for 3 or more days, you get $20 off your total.
+     * Write a code that gives out the total amount for different days(d).
+     * */
     public static int rentalCarCost(int d) {
         int total = d * 40;
         if (d >= 7) {
@@ -1509,13 +1520,208 @@ public class Main {
         return total;
     }
 
-    public static int saleHotDogs(final int n){
-        if (n < 5){
+    public static int saleHotDogs(final int n) {
+        if (n < 5) {
             return n * 100;
-        }else if (n < 10){
+        } else if (n < 10) {
             return n * 95;
         } else {
             return n * 90;
         }
+    }
+
+    /*
+     * Count the number of divisors of a positive integer n.
+     * Random tests go up to n = 500000.
+     * Note you should only return a number, the count of divisors.
+     * The numbers between parentheses are shown only for you to see which numbers are counted in each case.
+     * */
+    public static long numberOfDivisors(int n) {
+        long count = 0;
+        for (int i = 1; i * i <= n; i++) {
+            if (n % i == 0) {
+                count++;
+                if (i * i != n) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    /*
+     * Take an integer n (n >= 0) and a digit d (0 <= d <= 9) as an integer.
+     * Square all numbers k (0 <= k <= n) between 0 and n.
+     * Count the numbers of digits d used in the writing of all the k**2.
+     * Implement the function taking n and d as parameters and returning this count.
+     * */
+    public static int nbDig(int n, int d) {
+        int count = 0;
+        for (int i = 0; i <= n; i++) {
+            String square = String.valueOf(i * i);
+            for (int j = 0; j < square.length(); j++) {
+                if (square.charAt(j) == (d + 48)) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    /*
+    * Your task is to make two functions (max and min, or maximum and minimum, etc., depending on the language)
+    * that receive a list of integers as input, and return the largest and lowest number in that list, respectively.
+    * */
+    public static int min(int[] list){
+        int min = list[0];
+        for (int j : list) {
+            if (j < min) {
+                min = j;
+            }
+        }
+        return min;
+    }
+
+    public static int max(int[] list){
+        int max = list[0];
+        for (int j : list) {
+            if (j > max) {
+                max = j;
+            }
+        }
+        return max;
+    }
+
+    public static int minimum(int[] list){
+      return  Arrays.stream(list).min().orElseThrow(RuntimeException::new);
+    }
+    public static int maximum(int[] list){
+        return Arrays.stream(list).max().orElseThrow(RuntimeException::new);
+    }
+    /*
+    * The special value of a subsequence p is equal (pi - pi -1)
+    * where pi denotes the ith element of the subsequence
+    * Find out the minimum special value among all the subsequences of array a having length k,
+    * if not possible to apply operation print 0.
+    * Note:
+    * a subsequence is a sequence
+    * that can be derived from an array
+    * by deleting some or no elements without changing the order of the remaining elements.
+    * */
+    public static long minSpecialValue(int n,int[] a, int k) {
+        if (k > n || k <= 0) {
+            return 0;
+        }
+
+        // Sort the array
+        Arrays.sort(a);
+
+        // Calculate the special value for the first k elements
+        int specialValue = 0;
+        for (int i = 1; i < k; i++) {
+            specialValue += Math.abs(a[i] - a[i - 1]);
+        }
+
+        return specialValue;
+    }
+
+    public static int [] solution(int N, int K, int[] seat) {
+        List<Integer> reservedSeats = new ArrayList<>();
+        Set<Integer> availableSeats = new TreeSet<>();
+
+        for (int i = 1; i <= N; i++) {
+            availableSeats.add(i);
+        }
+
+        for (int i = 0; i < K; i++) {
+            if (seat[i] == 0) {
+                int reservedSeat = availableSeats.iterator().next();
+                availableSeats.remove(reservedSeat);
+                reservedSeats.add(reservedSeat);
+            } else {
+                availableSeats.add(seat[i]);
+                reservedSeats.remove((Integer) seat[i]);
+            }
+        }
+
+        return reservedSeats.stream().mapToInt(Integer::intValue).toArray();
+    }
+    
+    public static boolean can_get_word(String word){
+        List<String> blocksWord = new ArrayList<>();
+        blocksWord.add("BO");
+        blocksWord.add("XK");
+        blocksWord.add("DQ");
+        blocksWord.add("CP");
+        blocksWord.add("NA");
+        blocksWord.add("GT");
+        blocksWord.add("RE");
+        blocksWord.add("TG");
+        blocksWord.add("QD");
+        blocksWord.add("FS");
+        blocksWord.add("HU");
+        blocksWord.add("VI");
+        blocksWord.add("AT");
+        blocksWord.add("OB");
+        blocksWord.add("ER");
+        blocksWord.add("FS");
+        blocksWord.add("LY");
+        blocksWord.add("PC");
+        blocksWord.add("ZM");
+        blocksWord.add("JW");
+
+        word = word.toUpperCase();
+
+        for (String block : blocksWord) {
+            if (word.contains(block)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean canGetWord(String word, Map<String, Boolean> blocks) {
+        word = word.toUpperCase();
+        blocks = new HashMap<>();
+        blocks = new HashMap<>();
+        blocks.put("BO", true);
+        blocks.put("XK", true);
+        blocks.put("DQ", true);
+        blocks.put("CP", true);
+        blocks.put("NA", true);
+        blocks.put("GT", true);
+        blocks.put("RE", true);
+        blocks.put("TG", true);
+        blocks.put("QD", true);
+        blocks.put("FS", true);
+        blocks.put("HU", true);
+        blocks.put("VI", true);
+        blocks.put("AT", true);
+        blocks.put("OB", true);
+        blocks.put("ER", true);
+        blocks.put("LY", true);
+        blocks.put("PC", true);
+        blocks.put("ZM", true);
+        blocks.put("JW", true);
+
+        for (int i = 0; i < word.length(); i++) {
+            String letter = word.substring(i, i + 1);
+            boolean findBlock = false;
+
+            for (Map.Entry<String, Boolean> block : blocks.entrySet()) {
+                boolean blockValue = block.getValue();
+                String blockKey = block.getKey();
+                if (blockValue && blockKey.contains(letter)) {
+                    blocks.put(blockKey, false);
+                    findBlock = true;
+                    break;
+                }
+            }
+
+            if (!findBlock) {
+                return false;
+            }
+        }
+        return true;
     }
 }
