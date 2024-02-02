@@ -1,9 +1,12 @@
+import java.awt.*;
 import java.math.BigInteger;
 import java.util.*;
+import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 
+import static java.lang.System.in;
 import static java.lang.System.out;
 
 public class Main {
@@ -129,13 +132,16 @@ public class Main {
         out.println(saleHotDogs(9));
         out.println(numberOfDivisors(12));
         out.println(nbDig(5750, 0));
-        out.println(min(new int[]{-52,56,30,29,-54,0,-110}));
-        out.println(max(new int[]{-52,56,30,29,-54,0,-110}));
-        out.println(minimum(new int[]{-52,56,30,29,-54,0,-110}));
-        out.println(maximum(new int[]{-52,56,30,29,-54,0,-110}));
+        out.println(min(new int[]{-52, 56, 30, 29, -54, 0, -110}));
+        out.println(max(new int[]{-52, 56, 30, 29, -54, 0, -110}));
+        out.println(minimum(new int[]{-52, 56, 30, 29, -54, 0, -110}));
+        out.println(maximum(new int[]{-52, 56, 30, 29, -54, 0, -110}));
         out.println(minSpecialValue(7, new int[]{37, 91, 29, 58, 45, 51, 74}, 4));
         out.println(Arrays.toString(solution(5, 4, new int[]{0, 1, 0, 4})));
         out.println(can_get_word("A"));
+        out.println(camelCase("identifier"));
+        out.println(basicMath("+",9,2));
+        out.println(removeExclamationMarks("!Hello !World!"));
     }
 
     static int jumpingOnClouds(int[] c, int k) {
@@ -1569,10 +1575,10 @@ public class Main {
     }
 
     /*
-    * Your task is to make two functions (max and min, or maximum and minimum, etc., depending on the language)
-    * that receive a list of integers as input, and return the largest and lowest number in that list, respectively.
-    * */
-    public static int min(int[] list){
+     * Your task is to make two functions (max and min, or maximum and minimum, etc., depending on the language)
+     * that receive a list of integers as input, and return the largest and lowest number in that list, respectively.
+     * */
+    public static int min(int[] list) {
         int min = list[0];
         for (int j : list) {
             if (j < min) {
@@ -1582,7 +1588,7 @@ public class Main {
         return min;
     }
 
-    public static int max(int[] list){
+    public static int max(int[] list) {
         int max = list[0];
         for (int j : list) {
             if (j > max) {
@@ -1592,23 +1598,25 @@ public class Main {
         return max;
     }
 
-    public static int minimum(int[] list){
-      return  Arrays.stream(list).min().orElseThrow(RuntimeException::new);
+    public static int minimum(int[] list) {
+        return Arrays.stream(list).min().orElseThrow(RuntimeException::new);
     }
-    public static int maximum(int[] list){
+
+    public static int maximum(int[] list) {
         return Arrays.stream(list).max().orElseThrow(RuntimeException::new);
     }
+
     /*
-    * The special value of a subsequence p is equal (pi - pi -1)
-    * where pi denotes the ith element of the subsequence
-    * Find out the minimum special value among all the subsequences of array a having length k,
-    * if not possible to apply operation print 0.
-    * Note:
-    * a subsequence is a sequence
-    * that can be derived from an array
-    * by deleting some or no elements without changing the order of the remaining elements.
-    * */
-    public static long minSpecialValue(int n,int[] a, int k) {
+     * The special value of a subsequence p is equal (pi - pi -1)
+     * where pi denotes the ith element of the subsequence
+     * Find out the minimum special value among all the subsequences of array a having length k,
+     * if not possible to apply operation print 0.
+     * Note:
+     * a subsequence is a sequence
+     * that can be derived from an array
+     * by deleting some or no elements without changing the order of the remaining elements.
+     * */
+    public static long minSpecialValue(int n, int[] a, int k) {
         if (k > n || k <= 0) {
             return 0;
         }
@@ -1625,7 +1633,7 @@ public class Main {
         return specialValue;
     }
 
-    public static int [] solution(int N, int K, int[] seat) {
+    public static int[] solution(int N, int K, int[] seat) {
         List<Integer> reservedSeats = new ArrayList<>();
         Set<Integer> availableSeats = new TreeSet<>();
 
@@ -1646,8 +1654,8 @@ public class Main {
 
         return reservedSeats.stream().mapToInt(Integer::intValue).toArray();
     }
-    
-    public static boolean can_get_word(String word){
+
+    public static boolean can_get_word(String word) {
         List<String> blocksWord = new ArrayList<>();
         blocksWord.add("BO");
         blocksWord.add("XK");
@@ -1682,7 +1690,6 @@ public class Main {
 
     public static boolean canGetWord(String word, Map<String, Boolean> blocks) {
         word = word.toUpperCase();
-        blocks = new HashMap<>();
         blocks = new HashMap<>();
         blocks.put("BO", true);
         blocks.put("XK", true);
@@ -1723,5 +1730,54 @@ public class Main {
             }
         }
         return true;
+    }
+
+    public static String camelCase(String input) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < input.length(); i++) {
+            if (Character.isUpperCase(input.charAt(i))) {
+                stringBuilder.append(" ");
+            }
+            stringBuilder.append(input.charAt(i));
+        }
+        return stringBuilder.toString();
+    }
+
+    public static int goals(int laLigaGoals, int copaDelReyGoals, int championsLeagueGoals) {
+        return laLigaGoals + copaDelReyGoals + championsLeagueGoals;
+    }
+
+    /*
+    * Your task is to create a function that does four basic mathematical operations.
+    * The function should take three arguments - operation(string/char), value1(number), value2(number).
+    * The function should return a result of numbers after applying the chosen operation.
+    * */
+    public static Integer basicMath(String op, int v1, int v2) {
+        return switch (op) {
+            case "+" -> v1 + v2;
+            case "-" -> v1 - v2;
+            case "*" -> v1 * v2;
+            case "/" -> v1 / v2;
+            default -> null;
+        };
+    }
+
+    /* Write function RemoveExclamationMarks, which removes all exclamation marks from a given string.*/
+    static String removeExclamationMarks(String s) {
+        return s.replace("!", "");
+    }
+
+    /* Create a function that accepts a string and a single character, and returns an integer
+     * of the count of occurrences the 2nd argument is found in the first one.
+     * If no occurrences can be found, a count of 0 should be returned.
+     */
+    public static int strCount(String str, char letter) {
+        int count = 0;
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) == letter) {
+                count++;
+            }
+        }
+        return count;
     }
 }
