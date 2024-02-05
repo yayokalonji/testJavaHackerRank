@@ -1,12 +1,9 @@
-import java.awt.*;
 import java.math.BigInteger;
 import java.util.*;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-
-import static java.lang.System.in;
 import static java.lang.System.out;
 
 public class Main {
@@ -142,6 +139,8 @@ public class Main {
         out.println(camelCase("identifier"));
         out.println(basicMath("+",9,2));
         out.println(removeExclamationMarks("!Hello !World!"));
+        out.println(encode("recede"));
+        out.println(nbYear(1500, 5, 100, 5000));
     }
 
     static int jumpingOnClouds(int[] c, int k) {
@@ -1779,5 +1778,44 @@ public class Main {
             }
         }
         return count;
+    }
+
+    /*
+    * The goal of this exercise is to convert a string to a new string where each character
+    * in the new string is "(" if that character appears only once in the original string, or ")"
+    * if that character appears more than once in the original string.
+    * Ignore capitalization when determining if a character is a duplicate.
+    * */
+    public static String encode(String word){
+        StringBuilder stringBuilder = new StringBuilder();
+        word = word.toLowerCase();
+        for (int i = 0; i < word.length(); i++) {
+            if (word.indexOf(word.charAt(i)) == word.lastIndexOf(word.charAt(i))) {
+                stringBuilder.append("(");
+            } else {
+                stringBuilder.append(")");
+            }
+        }
+        return stringBuilder.toString();
+    }
+    /*
+    * In a small town, the population is p0 = 1000 at the beginning of a year.
+    * The population regularly increases by 2 percent per year, and
+    *  moreover, 50 new inhabitants per year come to live in the town.
+    * How many years does the town need to see its population greater than or equal to p = 1200 inhabitants?
+    * More generally given parameters:
+    * p0, percent, aug (inhabitants coming or leaving each year),
+    * p (population to equal or surpass)
+    * the function nb_year should return the number of entire years
+    * needed to get a population greater or equal to p.
+    * aug is an integer, percent a positive or null floating number, p0 and p are positive integers (> 0)
+    * */
+    public static int nbYear(int p0, double percent, int aug, int p) {
+        int years = 0;
+        while (p0 < p) {
+            p0 += (int) (p0 * percent / 100) + aug;
+            years++;
+        }
+        return years;
     }
 }
