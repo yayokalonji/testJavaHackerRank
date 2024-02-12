@@ -137,10 +137,14 @@ public class Main {
         out.println(Arrays.toString(solution(5, 4, new int[]{0, 1, 0, 4})));
         out.println(can_get_word("A"));
         out.println(camelCase("identifier"));
-        out.println(basicMath("+",9,2));
+        out.println(basicMath("+", 9, 2));
         out.println(removeExclamationMarks("!Hello !World!"));
         out.println(encode("recede"));
         out.println(nbYear(1500, 5, 100, 5000));
+        out.println(xor(true, true));
+        out.println(arithmetic(5, 2, "divide"));
+        out.println(dnaToRna("GCAT"));
+        out.println(incrementString("foobar99"));
     }
 
     static int jumpingOnClouds(int[] c, int k) {
@@ -1747,10 +1751,10 @@ public class Main {
     }
 
     /*
-    * Your task is to create a function that does four basic mathematical operations.
-    * The function should take three arguments - operation(string/char), value1(number), value2(number).
-    * The function should return a result of numbers after applying the chosen operation.
-    * */
+     * Your task is to create a function that does four basic mathematical operations.
+     * The function should take three arguments - operation(string/char), value1(number), value2(number).
+     * The function should return a result of numbers after applying the chosen operation.
+     * */
     public static Integer basicMath(String op, int v1, int v2) {
         return switch (op) {
             case "+" -> v1 + v2;
@@ -1781,12 +1785,12 @@ public class Main {
     }
 
     /*
-    * The goal of this exercise is to convert a string to a new string where each character
-    * in the new string is "(" if that character appears only once in the original string, or ")"
-    * if that character appears more than once in the original string.
-    * Ignore capitalization when determining if a character is a duplicate.
-    * */
-    public static String encode(String word){
+     * The goal of this exercise is to convert a string to a new string where each character
+     * in the new string is "(" if that character appears only once in the original string, or ")"
+     * if that character appears more than once in the original string.
+     * Ignore capitalization when determining if a character is a duplicate.
+     * */
+    public static String encode(String word) {
         StringBuilder stringBuilder = new StringBuilder();
         word = word.toLowerCase();
         for (int i = 0; i < word.length(); i++) {
@@ -1799,17 +1803,17 @@ public class Main {
         return stringBuilder.toString();
     }
     /*
-    * In a small town, the population is p0 = 1000 at the beginning of a year.
-    * The population regularly increases by 2 percent per year, and
-    *  moreover, 50 new inhabitants per year come to live in the town.
-    * How many years does the town need to see its population greater than or equal to p = 1200 inhabitants?
-    * More generally given parameters:
-    * p0, percent, aug (inhabitants coming or leaving each year),
-    * p (population to equal or surpass)
-    * the function nb_year should return the number of entire years
-    * needed to get a population greater or equal to p.
-    * aug is an integer, percent a positive or null floating number, p0 and p are positive integers (> 0)
-    * */
+     * In a small town, the population is p0 = 1000 at the beginning of a year.
+     * The population regularly increases by 2 percent per year, and
+     *  moreover, 50 new inhabitants per year come to live in the town.
+     * How many years does the town need to see its population greater than or equal to p = 1200 inhabitants?
+     * More generally given parameters:
+     * p0, percent, aug (inhabitants coming or leaving each year),
+     * p (population to equal or surpass)
+     * the function nb_year should return the number of entire years
+     * needed to get a population greater or equal to p.
+     * aug is an integer, percent a positive or null floating number, p0 and p are positive integers (> 0)
+     * */
     public static int nbYear(int p0, double percent, int aug, int p) {
         int years = 0;
         while (p0 < p) {
@@ -1817,5 +1821,84 @@ public class Main {
             years++;
         }
         return years;
+    }
+    /*
+     * In some scripting languages like PHP,
+     * there exists a logical operator (e.g. &&, ||, and, or, etc.) called the "Exclusive Or"
+     * (hence the name of this Kata). The exclusive or evaluates two booleans.
+     * It then returns true if exactly one of the two expressions are true, false otherwise. For example:
+     *
+     * false xor false == false // since both are false
+     * true xor false == true // exactly one of the two expressions are true
+     * false xor true == true // exactly one of the two expressions are true
+     * true xor true == false // Both are true.  "xor" only returns true if EXACTLY one of the two expressions evaluate to true.
+     * Since we cannot define keywords in Javascript (well, at least I don't know how to do it),
+     * your task is to define a function xor(a, b) where a and b are the two expressions to be evaluated.
+     * Your xor function should have the behaviour described above, returning true if exactly one of the two expressions evaluate to true, false otherwise.
+     * */
+
+    public static boolean xor(boolean a, boolean b) {
+        return a != b;
+    }
+    /*
+    * Given two numbers and an arithmetic operator (the name of it, as a string), return the result of the two numbers having that operator used on them.
+    * a and b will both be positive integers, and a will always be the first number in the operation, and b always the second.
+    * The four operators are "add", "subtract", "divide", "multiply".
+    * */
+    public static int arithmetic(int a, int b, String operator) {
+        return switch (operator) {
+            case "add" -> a + b;
+            case "subtract" -> a - b;
+            case "divide" -> a / b;
+            case "multiply" -> a * b;
+            default -> 0;
+        };
+    }
+    /*
+    * Deoxyribonucleic acid, DNA is the primary information storage molecule in biological systems.
+    * It is composed of four nucleic acid bases Guanine ('G'), Cytosine ('C'), Adenine ('A'), and Thymine ('T').
+    * Ribonucleic acid, RNA, is the primary messenger molecule in cells.
+    * RNA differs slightly from DNA its chemical structure and contains no Thymine.
+    * In RNA Thymine is replaced by another nucleic acid Uracil ('U').
+    * Create a function which translates a given DNA string into RNA.
+    * */
+    public static String dnaToRna(String dna) {
+        return dna.replace("T", "U");
+    }
+
+    /*
+    * We need a simple function that determines if a plural is needed or not.
+    * It should take a number, and return true if a plural should be used with that number or false if not.
+    * This would be useful when printing out a string such as 5 minutes, 14 apples, or 1 sun.
+    * You only need to worry about english grammar rules for this kata,
+    * where anything that isn't singular (one of something), it is plural (not one of something).
+    * All values will be positive integers or floats, or zero.
+    * */
+    public static boolean plural(float f) {
+        return f != 1;
+    }
+
+    /*
+    * Your job is to write a function which increments a string, to create a new string.
+    * If the string already ends with a number, the number should be incremented by 1.
+    * If the string does not end with a number, The number 1 should be appended to the new string.
+    * Attention: If the number has leading zeros, the number of digits should be considered.
+    * */
+    public static String incrementString(String str) {
+        StringBuilder builder = new StringBuilder(str);
+        for (int i = builder.length() - 1; i >= 0; i--) {
+            char c = builder.charAt(i);
+            if (c >= '0' && c < '9') {
+                builder.setCharAt(i, (char)(c + 1));
+                return builder.toString();
+            } else if (c == '9') {
+                builder.setCharAt(i, '0');
+            } else {
+                builder.insert(i + 1, '1');
+                return builder.toString();
+            }
+        }
+
+        return "1" + "0".repeat(str.length());
     }
 }
